@@ -113,6 +113,8 @@ Status match(SqStack &S) {
 	}
 	return OK;
 }
-//	if(!S.base) 
-//	pop push --S.top *S.top++=e;
-//	switch中的case; 
+//	if(!S.base) exit(OVERFLOW);注意if(!S.base)是当S.base为空的时候才执行后面的语句。
+//  在写程序的时候直接写成了if(S.base);导致程序直接退出。
+//  pop函数中的语句写成了 *S.top++=e；而push函数中的语句写成了*S.top--；两者写反了。 
+//	注意switch中的case，如果在执行的case中没有break，后面的case无论是否匹配都
+//  执行相应的内容; 

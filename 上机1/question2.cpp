@@ -86,5 +86,8 @@ Status traverse(LinkList &L) {
 	cout<<endl;
 	return OK;
 }
-
+//while(p){loop};这种循环p最后一定会为NULL；
+//若想定位到最后一个节点应该用while(p-next){loop};
+//注意节点个数的统计；
+//注意冒泡排序和选择法排序的区别。 
 

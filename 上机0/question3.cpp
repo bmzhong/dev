@@ -92,4 +92,4 @@ Status divide(LinkList &La,LinkList &Lb){
 	int i=bcad;
 	cout<<r<<"/"<<cd<<"+"<<i<<"i/"<<cd<<endl;
 }
-
+//在做虚数除法的时候正负号搞错，并且没有注意int型做除法的时候会舍去小数。 

@@ -264,3 +264,15 @@ Status countQueue(WaitQueue &W, int &count) {
 	}
 	return OK;
 }
+/*
+  1.将data传入函数后，对data的数据进行了处理，然后又在原函数中处理了和输出了data的值， 
+但是由于data没有用引用传递，导致在原函数中的data数据没有发生改变，从而产生了错误的结果。
+  2.将代码从devc++中赋值到clion中，调试和运行的编码不同，调试的时候功能正常，而运行不正常
+  3.在节点出队列的时候，没有做if (W.rear == p) {W.rear = W.front;}的判断，并且W.rear=W.front
+不要写成W.rear==W.front,虽然在Clion中有提示。 
+  4.在出栈和出队列的时候，应改变其中每辆车的位置信息。
+  5.在计算队列的节点个数时，一开始用W.rear-W.front，出现了错误，另外写了一个countQueue函数。
+链式结构用W.top-W.base或者W.rear-W.front没有意义。
+  6.do while{}循环改成了while(true){if break}循环，判断的是当前的data.ad而不是上一次的data.ad
+     
+*/

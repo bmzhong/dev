@@ -120,3 +120,5 @@ Status last(LinkList &p){
     p=q;
 	return OK;
 }
+//注意题目中要求用单项循环链表，但上述代码是用单链表，导致代码量增大，
+//注意while(q->next!=p){loop};是定位到q的前一个节点。 

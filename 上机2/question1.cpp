@@ -56,8 +56,7 @@ Status converse(SqStack &S){
 bool stackEmpty(SqStack &S){
    return S.base==S.top?true:false;
 }
-//注意*S.top不是栈顶元素
-//注意*S.top++=e和e=*--S.top; 
+
 Status pop(SqStack &S, ElementType &e) {
     if (S.top == S.base) {
         return ERROR;
@@ -78,3 +77,6 @@ Status push(SqStack &S, ElementType e) {
     *S.top++ = e;
     return OK;
 }
+//注意*S.top不是栈顶元素
+//注意*S.top++=e和e=*--S.top; 
+//注意栈满的判断条件为 S.top - S.base >= S.size
