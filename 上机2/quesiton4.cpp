@@ -17,7 +17,6 @@ typedef struct Data {
 	ElementType license;
 	ElementType time;
 	ElementType inTime;
-	int pw;
 	int site;
 } Data, *PData;
 typedef struct ParkStack {
@@ -158,7 +157,6 @@ Status push(ParkStack &P, Data &data) {
 	if (!P.base) {
 		exit(OVERFLOW);
 	}
-	data.pw = 0;
 	data.site = P.top - P.base + 1;
 	data.inTime = data.time;
 	*P.top++ = data;
