@@ -123,3 +123,15 @@ Status find(SqList &L,int &t,int m) {
 	}
 	return OK;
 }
+/*
+	if(t+m-1<L.lenth) {
+			t=t+m-1;
+			deleteElement(L,t);
+			continue;
+		}
+		if(t+m-1==L.lenth) 
+在winner函数的while循环中，if(t+m-1<L.lenth){}里改变了t的值，
+在下一个if(t+m-1==L.lenth)判断的时候t的值已经不是原来那个值，而是
+第一个if里面改变后的值，这会影响第二个if的判断，所以要加continue来跳过这个循环。 
+*/
+
