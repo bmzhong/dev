@@ -40,19 +40,19 @@ int main() {
 	cout<<"将s2插入在s1的第i个位置后"<<endl;
 	strInsert(s1,3,s2);
 	print(s1);
-	cout<<"用s3替换s1中所有出现的s2："<<endl; 
+	cout<<"用s3替换s1中所有出现的s2："<<endl;
 	strRep(s1,s2,s3);
 	print(s1);
 	cout<<"删除s1第i个位置后长度为len的子串"<<endl;
 	strDelete(s1,3,3);
 	print(s1);
-//  "带三个参数的字符串连接函数" 即将s1,s2连接起来赋值给s 
+//  "带三个参数的字符串连接函数" 即将s1,s2连接起来赋值给s
 //	strConcat(s1,s2,s);
 //	print(s);
 //	cout<<getLength(s)<<endl;
-//  带两个参数的字符串连接函数，即将s2连在s1的后面 
+//  带两个参数的字符串连接函数，即将s2连在s1的后面
 	strConcat(s1,s2);
-	cout<<"s1,s2连接后的字符串："<<endl; 
+	cout<<"s1,s2连接后的字符串："<<endl;
 	print(s1);
 	cout<<"s1的长度："<<getLength(s1)<<endl;
 	strSub(s2,s1,2,3);
@@ -147,7 +147,7 @@ int strCmp(String s1,String s2) {
 			return s1[i]-s2[i];
 		}
 	}
-	return s1[0]-s2[0];
+	return (int)s1[0]-(int)s2[0];
 }
 
 int strIndex(String s,String t,int pos) {
@@ -213,3 +213,8 @@ Status strRep(String &s,String t,String r) {
 	}
 	return OK;
 }
+/*
+strDelete函数中strInsert(s,i,sub);语句改变了s的长度，需要将s之前的长度保留下来。
+否则最后给s[0]赋值的时候会得到错误的长度。
+*/
+
