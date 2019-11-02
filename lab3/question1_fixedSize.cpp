@@ -24,39 +24,42 @@ int main() {
 	ch1=(char*)malloc(sizeof(char)*50);
 	ch2=(char*)malloc(sizeof(char)*50);
 	ch3=(char*)malloc(sizeof(char)*50);
+	cout<<"请输入c1,c2,c3的值"<<endl;
 	cin.getline(ch1,50);
 	cin.getline(ch2,50);
 	cin.getline(ch3,50);
 	strAssign(s1,ch1);
 	strAssign(s2,ch2);
 	strAssign(s3,ch3);
+	cout<<"c1,c2,c3分别赋给s1,s2,s3后的值："<<endl;
+	cout<<"s1的值：";
 	print(s1);
+	cout<<"s2的值：";
 	print(s2);
+	cout<<"s3的值：";
 	print(s3);
-	cout<<"s1,s2比较后的结果："<<endl;
-	cout<<strCmp(s1,s2)<<endl;
-	cout<<"子串s2在主串s1的pos位置后首次出现的位置："<<endl;
-	cout<<strIndex(s1,s2,1)<<endl;
-	cout<<"将s2插入在s1的第i个位置后"<<endl;
+	cout<<"s1的长度："<<getLength(s1)<<endl;
+	cout<<"s1,s2比较后的结果："<<strCmp(s1,s2)<<endl;
+	cout<<"子串s2在主串s1的第一个字符位置后首次出现的位置："<<strIndex(s1,s2,1)<<endl;
 	strInsert(s1,3,s2);
+	cout<<"将s2插入在s1的第3个字符开始后的位置,s1的值：";
 	print(s1);
-	cout<<"用s3替换s1中所有出现的s2："<<endl;
 	strRep(s1,s2,s3);
+	cout<<"用s3替换s1中所有出现的s2后：s1的值：";
 	print(s1);
-	cout<<"删除s1第i个位置后长度为len的子串"<<endl;
 	strDelete(s1,3,3);
+	cout<<"删除s1第3个字符开始的长度为3的子串：s1的值：";
 	print(s1);
 //  "带三个参数的字符串连接函数" 即将s1,s2连接起来赋值给s
 //	strConcat(s1,s2,s);
 //	print(s);
 //	cout<<getLength(s)<<endl;
-//  带两个参数的字符串连接函数，即将s2连在s1的后面
+//    带两个参数的字符串连接函数，即将s2连在s1的后面
 	strConcat(s1,s2);
-	cout<<"s1,s2连接后的字符串："<<endl;
+	cout<<"s1,s2连接后，s1的值：";
 	print(s1);
-	cout<<"s1的长度："<<getLength(s1)<<endl;
 	strSub(s2,s1,2,3);
-	cout<<"s1的子串："<<endl;
+	cout<<"s1从第2个字符开始长度为3的子串：";
 	print(s2);
 	return 0;
 }
@@ -200,8 +203,8 @@ Status strDelete(String &s,int i,int len) {
 
 Status strRep(String &s,String t,String r) {
 	int i=1;
-	while(i<=((int)s[0]-(int)t[0]+1)) {
-		i=strIndex(s,t,1);
+	while((i<=((int)s[0]-(int)t[0]+1))) {
+		i=strIndex(s,t,i);
 		if(i>0) {
 			strDelete(s,i,(int)t[0]);
 			strInsert(s,i,r);
