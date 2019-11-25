@@ -8,31 +8,28 @@ typedef struct Node {
 	struct Node *lchild;
 	struct Node *rchild;
 } Node,*PNode;
-bool initTree(PNode &p,vector<int> v,int &i);
+bool insert(PNode &p,int v);
 void disp(PNode &p);
 int main() {
 	PNode p=NULL;
-	int i=0;
-	vector<int> v{5,4,2,1,7,3,6};
-	initTree(p,v,i);
+	vector<int> v {5,4,2,1,7,3,6};
+	for(int i=0; i<v.size(); ++i) {
+		insert(p,v[i]);
+	}
 	disp(p);
 	return 0;
 }
-bool initTree(PNode &p,vector<int> v,int &i) {
-	if(i>=v.size()){
-		return false;
-	}
+bool insert(PNode &p,int v) {
 	if(p==NULL) {
-		PNode p=(PNode)malloc(sizeof(Node));
+		p=(PNode)malloc(sizeof(Node));
 		p->lchild=NULL;
 		p->rchild=NULL;
-		p->data=v[i];
-		i++;
-		if(v[i]>p->data) {
-			initTree(p->rchild,v,i);
-		} else {
-			initTree(p->lchild,v,i);
-		}
+		p->data=v;
+		return true;
+	} else if(v>=p->data) {
+		insert(p->rchild,v);
+	} else {
+		insert(p->lchild,v);
 	}
 	return true;
 }
@@ -44,5 +41,19 @@ void disp(PNode &p) {
 	cout<<p->data<<" ";
 	if(p->rchild) {
 		disp(p->rchild);
+	}
+}
+
+void search(PNode &p,PNode &q,int v) {
+	if(!p->lchild&&!p->rchild&&p->data!=v) {
+		q=NULL;
+	}else if()
+}
+bool delete(PNode &p,int v) {
+	if(!p->lchild&&p->!rchild) {
+		free(p);
+		return true;
+	} else if(!p->lchild&&p->rchild) {
+
 	}
 }
