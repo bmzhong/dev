@@ -27,12 +27,19 @@ int main() {
 		v.push_back(e);
 		insert(p,v[i]);
 	}
-	int m,n;
+	int m,n,c;
 	cout<<"二叉树中序遍历序列："<<endl;
 	disp(p);
 	cout<<endl<<"输入需要查找的数据："<<endl;
 	cin>>m;
 	searchElem(p,m);
+	cout<<"输入需要插入的数据："<<endl;
+	cin>>c;
+	v.push_back(c);
+	insert(p,v.back());
+	cout<<"二叉树中序遍历序列："<<endl;
+	disp(p);
+	cout<<endl;
 	cout<<"输入需要删除的数据："<<endl;
 	cin>>n;
 	deleteElem(p,n);
@@ -97,7 +104,7 @@ void deleteElem(PNode &root,int v) {
 	search(root,q,v);
 	searchFather(root,root,f,v);
 	if(!q->lchild&&!q->rchild) {
-		if(q==root){
+		if(q==root) {
 			free(q);
 			root=NULL;
 		}
@@ -113,7 +120,7 @@ void deleteElem(PNode &root,int v) {
 			PNode y=root;
 			root=root->rchild;
 			free(y);
-		}else if(f->lchild->data==v) {
+		} else if(f->lchild->data==v) {
 			f->lchild=q->rchild;
 			free(q);
 		} else if(f->rchild->data==v) {
@@ -125,7 +132,7 @@ void deleteElem(PNode &root,int v) {
 			PNode y=root;
 			root=root->lchild;
 			free(y);
-		}else if(f->lchild->data==v) {
+		} else if(f->lchild->data==v) {
 			f->lchild=q->lchild;
 			free(q);
 		} else if(f->rchild->data==v) {
