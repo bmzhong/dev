@@ -8,9 +8,7 @@ void fun(int *&n){
 	*n=10;
 }
 int main(){
-	int a=0;
-	int *i=NULL;
-	fun(i);
-	cout<<*i;
+	char *="abc";
+	const char 
 	return 0;
 }
