@@ -22,26 +22,6 @@ int main() {
 	toHash(v,s);
 	return 0;
 };
-void readData(vector<Data> &v) {
-	ifstream infile("E:\\dev\\lab5\\data.txt");
-	if(!infile.is_open()) {
-		cout<<"文件打开失败"<<endl;
-	}
-	string str;
-	Data data;
-	while(getline(infile,str)) {
-		int pos1=str.find_first_of(" ",0);
-		int pos2=str.find_first_of(" ",pos1);
-		data.name=str.substr(0,pos1);
-		data.phone=str.substr(pos1+1,11);
-		int len=str.length()-data.name.length()-data.phone.length()-2;
-		data.site=str.substr(pos2+1,len);
-		v.push_back(data);
-	}
-//	for(auto &i:v) {
-//		cout<<i.name<<" "<<i.phone<<" "<<i.site<<endl;
-//	}
-}
 
 void toHash(vector<Data> &v,vector<Data> &s) {
 	Data temp;
@@ -64,11 +44,22 @@ void toHash(vector<Data> &v,vector<Data> &s) {
 				pos=0;
 			}
 		}
-		replace(begin(s),begin(s),s[pos],v[1]);
+		s[pos].name=data.name;
+		s[pos].phone=data.phone;
+		s[pos].site=data.site;
+//		replace(s.begin()+pos,s.begin()+pos,temp,data);
 	}
 	for(auto &i:s) {
 		cout<<i.name<<" "<<i.phone<<" "<<i.site<<endl;
 	}
+}
+
+void searchByphone(vector<Data> &s,string phone){
+	if(phone.size()&&phone.find(" ")!=-1){
+		cout<<"输入的号码不符合要求 over"<<endl;
+		return;
+	}
+	
 }
 
 void prime(int s,int &m) {
@@ -87,6 +78,26 @@ void prime(int s,int &m) {
 	}
 }
 
+void readData(vector<Data> &v) {
+	ifstream infile("E:\\dev\\lab5\\data.txt");
+	if(!infile.is_open()) {
+		cout<<"文件打开失败"<<endl;
+	}
+	string str;
+	Data data;
+	while(getline(infile,str)) {
+		int pos1=str.find_first_of(" ",0);
+		int pos2=str.find_first_of(" ",pos1+1);
+		data.name=str.substr(0,pos1);
+		data.phone=str.substr(pos1+1,11);
+		int len=str.length()-data.name.length()-data.phone.length()-2;
+		data.site=str.substr(pos2+1,len);
+		v.push_back(data);
+	}
+//	for(auto &i:v) {
+//		cout<<i.name<<" "<<i.phone<<" "<<i.site<<endl;
+//	}
+}
 
 
 
