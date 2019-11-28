@@ -64,50 +64,54 @@ void toHashByPhone(vector<Data> &v,vector<Data> &s) {
 }
 
 void toHashByName(vector<Data> &v,vector<PNode> &f) {
-	int b=v.size(),m=0;
-	char *a1,*b1;
-	a1=(char *)malloc(sizeof(char));
-	b1=(char *)malloc(sizeof(char));
-	prime(b,m);
-	f.reserve(m+1);
-	for(int i=0; i<m+1; ++i) {
-		PNode temp=NULL;
-		f.push_back(temp);
-	}
-	for(auto &data:v) {
-		int w=data.name.size();
-		string b=data.name.substr(1,1);
-		string a=data.name.substr(0,1);
-		strcpy(a1,a.c_str());
-		strcpy(b1,b.c_str());
-		int num=(int)a1[0]+(int)b1[0];
-		int pos=num%m;
-		PNode pdata=f[pos],q=NULL;
-		PNode t=(PNode)malloc(sizeof(Node));
-		t->data=data;
-		t->next=NULL;
-		if(pdata!=NULL) {
-			if(pdata->next) {
-				t->next=pdata->next;
-				pdata->next=t;
-			} else {
-				pdata->next=t;
-			}
-		} else {
-			pdata=t;
-		}
-		free(t);
-	}
-	free(a1);
-	free(b1);
-	PNode r=NULL;
-	for(auto &i:f) {
-		r=i;
-		while(r) {
-			cout<<"ÐÕÃû£º"<<r->data.name<<" ºÅÂë£º"<<r->data.phone<<" µØÖ·£º"<<r->data.site<<endl;
-			r=r->next;
-		}
-	}
+    int b=v.size(),m=0;
+    char *a1,*b1;
+    a1=(char *)malloc(2*sizeof(char));
+    b1=(char *)malloc(2*sizeof(char));
+    prime(b,m);
+    f.reserve(m+1);
+    PNode t=NULL,pdata=NULL;
+    t=(PNode)malloc(1*sizeof(Node));
+    t->data.name="null";
+    t->data.phone="null";
+    t->data.site="null";
+    for(int i=0; i<m+1; ++i) {
+        PNode temp=NULL;
+        f.push_back(temp);
+    }
+    for(auto da:v) {
+        string b=da.name.substr(1, 1);
+        string a=da.name.substr(0, 1);
+        strcpy(a1,a.c_str());
+        strcpy(b1,b.c_str());
+        int num=(int)a1[0]+(int)b1[0];
+        int pos=num%m;
+        pdata=f[pos];
+        t->data.name=da.name;
+        t->data.phone=da.phone;
+        t->data.site=da.site;
+        t->next=NULL;
+        if(pdata!=NULL) {
+            if(pdata->next) {
+                t->next=pdata->next;
+                pdata->next=t;
+            } else {
+                pdata->next=t;
+            }
+        } else {
+            pdata=t;
+        }
+    }
+    free(a1);
+    free(b1);
+    PNode r=NULL;
+    for(auto &i:f) {
+        r=i;
+        while(r) {
+            cout<<"ÐÕÃû£º"<<r->data.name<<" ºÅÂë£º"<<r->data.phone<<" µØÖ·£º"<<r->data.site<<endl;
+            r=r->next;
+        }
+    }
 }
 
 void searchByPhone(vector<Data> &s,string phone) {

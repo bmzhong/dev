@@ -1,11 +1,22 @@
 #include<iostream>
 #include<cstdlib>
-#include<vector>
-#include<algorithm>
+#include<string>
+#include<string.h>
 using namespace std;
+typedef struct Data {
+    string name;
+    string phone;
+    string site;
+} Data,*PData;
+typedef struct Node {
+    Data data;
+    struct Node *next;
+} Node,*PNode;
 int main(){
-	string str="a";
-	int n=atoi(str.c_str());
-	cout<<n;
-	return 0;
+    PNode p;
+    p=new Node;
+    string str="fdafa";
+    string str1="fdafa";
+    p->data.name=str;
+    return 0;
 }
