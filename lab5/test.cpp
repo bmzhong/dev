@@ -3,12 +3,9 @@
 #include<vector>
 #include<algorithm>
 using namespace std;
-void fun(int *&n){
-	n=(int *)malloc(sizeof(int));
-	*n=10;
-}
 int main(){
-	char *="abc";
-	const char 
+	string str="a";
+	int n=atoi(str.c_str());
+	cout<<n;
 	return 0;
 }
