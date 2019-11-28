@@ -28,22 +28,7 @@ int main() {
 	end1=GetTickCount();
 	cout<<"时间："<<(end1-start1)/55<<"ms  "<<endl;
 	cout<<"是否有序："<<(is_sorted(v.begin()+1,v.end())?"是":"否")<<endl;
-		cout<<"交换次数："<<sw<<"	比较次数："<<compare<<"    移动次数："<<move<<endl;
-//	vector<int> s(b.begin(),b.end());
-//	vector<int> in(b.begin(),b.end());
-//	DWORD start1,end1,start2,end2,start3,end3;
-//	start1=GetTickCount();
-//	bubble(b);
-//	end1=GetTickCount();
-//	cout<<"时间："<<(end1-start1)/55<<"ms  "<<endl<<endl;
-//	start2=GetTickCount();
-//	select(b);
-//	end2=GetTickCount();
-//	cout<<"时间："<<(end2-start2)/55<<"ms  "<<endl<<endl;
-//	start3=GetTickCount();
-//	insert(in);
-//	end3=GetTickCount();
-//	cout<<"时间："<<(end3-start3)/55<<"ms  "<<endl<<endl;
+	cout<<"交换次数："<<sw<<"	比较次数："<<compare<<"    移动次数："<<move<<endl;
 	return 0;
 }
 
@@ -116,63 +101,4 @@ void read(vector<int> &b) {
 		}
 	}
 }
-//
-//void bubble(vector<int> &b) {
-//	int sw=0,move=0,compare=0;
-//	for(int i=b.size()-1; i>=0; --i) {
-//		compare++;
-//		for(int j=0; j<i; ++j) {
-//			compare++;
-//			if(b[j]>b[j+1]) {
-//				swap(b[j],b[j+1]);
-//				sw++;
-//			}
-//			compare++;
-//		}
-//	}
-//	cout<<"冒泡法："<<endl;
-//	cout<<"是否有序："<<(is_sorted(b.begin(),b.end())?"是":"否")<<endl;
-//	cout<<"交换次数："<<sw<<"	比较次数："<<compare<<"    移动次数："<<move<<endl;
-//
-//}
-//
-//void select(vector<int> &s) {
-//	int sw=0,move=0,compare=0;
-//	for(int i=s.size()-1; i>=0; --i) {
-//		compare++;
-//		for(int j=0; j<i; ++j) {
-//			compare++;
-//			if(s[i]<s[j]) {
-//				swap(s[i],s[j]);
-//				sw++;
-//			}
-//			compare++;
-//		}
-//	}
-//	cout<<"选择法："<<endl;
-//	cout<<"是否有序："<<(is_sorted(s.begin(),s.end())?"是":"否")<<endl;
-//	cout<<"交换次数："<<sw<<"	比较次数："<<compare<<"    移动次数："<<move<<endl;
-//}
-//
-//void insert(vector<int> &in) {
-//	int sw=0,move=0,compare=0;
-//	in.insert(in.begin(),0);
-//	int t,i,j;
-//	for(i=2; i<=in.size(); ++i) {
-//		compare++;
-//		in.front()=in[i];
-//		move++;
-//		t=in[i];
-//		for(j=i-1; in.front()<in[j]; --j) {
-//			compare++;
-//			in[j+1]=in[j];
-//			move++;
-//		}
-//		in[j]=in.front();
-//	}
-//	cout<<"直接插入法："<<endl;
-//	cout<<"是否有序："<<(is_sorted(in.begin(),in.end())?"是":"否")<<endl;
-//	cout<<"交换次数："<<sw<<"	比较次数："<<compare<<"    移动次数："<<move<<endl;
-//}
-
 
