@@ -191,5 +191,7 @@ Status traverse(LinkStack &L) {
 //并且这个方向会被记录下来，导致下一次回到这里的时候无法向这个方向探索，
 //事实上通过isSame函数在第一次探索的时候已经排除了那个不需要判断的方向， 
 //并且对下次回到这个位置的探索不产生影响。
-//疑问：M.map=map1;这个语句为什么无法对M.map赋值为map1; 已解决； 
+//疑问：M.map=map1;这个语句为什么无法对M.map赋值为map1; 已解决；
+//参考https://blog.csdn.net/ginwafts/article/details/80858232  https://zhidao.baidu.com/question/434297957014022284.html
+//结构体数组只能在初始化的时候用"="赋值，其他情况下只能一个个分别赋值。 
 //在循环体中忘记写t=t->next;导致一直输出同一个值。下次排查错误的时候应注意这种情况。 
