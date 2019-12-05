@@ -1,105 +1,105 @@
 #include <iostream>
+#include<iomanip>
 using namespace std;
-const int maxnum = 100;
-const int maxint = 999999;
-void Dijkstra(int n, int v, int *dist, int *prev, int c[maxnum][maxnum]) {
-	bool s[maxnum];    // 判断是否已存入该点到S集合中
+#define  num  100
+#define inf  100000
+void path(int *last,int first, int aim);
+void dijkstra(int n, int v, int *distance, int *last, int k[num][num]);
+void init(int &n,int &arcs,int *distance,int *last,int k[num][num]);
+void showMatrix(int k[num][num],int n);
+int main() {
+	int distance[num];     
+	int k[num][num];   
+	int n, arcs;       
+	int last[num];
+	init(n,arcs,distance,last,k);
+	showMatrix(k,n);     
+	dijkstra(n, 1, distance, last, k);
+	cout << "源点到点的最短路径长度: " << distance[n] << endl;
+	cout << "源点到点的路径为: ";
+	path(last, 1, n);
+	return 0;
+}
+
+void init(int &n,int &arcs,int *distance,int *last,int c[num][num]) {
+	cout<<"请输入顶点数和边的数目: "<<endl; 
+	cin >> n >>arcs;
+	int v1, v2, weight;          
 	for(int i=1; i<=n; ++i) {
-		dist[i] = c[v][i];   //初始化其他点到源点的最短距离
-		s[i] = 0;            // 初始都未用过该点
-		if(dist[i] == maxint) //初始化其他点距离源点最短路径的前一个点
-			prev[i] = 0;    //其他点到源点   不存在路径时，
-		else
-			prev[i] = v;
-	}
-	//初始化源点的状态
-	dist[v] = 0;
-	s[v] = 1;
-	// 依次将未放入S集合的结点中，取dist[]最小值的结点，放入结合S中
-	// 一旦S包含了所有V中顶点，dist就记录了从源点到所有其他顶点之间的最短路径长度
-	for(int i=2; i<=n; ++i) {
-		int tmp = maxint;
-		int u = v;
-		// 找出当前未使用的点j的dist[j]最小值
 		for(int j=1; j<=n; ++j) {
-			if((!s[j]) && dist[j]<tmp) {
-				u = j;              // u保存当前邻接点中距离最小的点的号码
-				tmp = dist[j];
+			c[i][j] = inf;
+		}
+	}
+	cout<<"请分别输入两个临界点和权值: "<<endl;
+	for(int i=1; i<=arcs; ++i) {
+		cin >> v1 >> v2 >> weight;  
+		c[v1][v2] = c[v2][v1] = weight;
+	}
+	for(int i=1; i<=n; ++i) {
+		distance[i] = inf;
+	}
+}
+
+void showMatrix(int k[num][num],int n) {
+	for(int i=1; i<=n; ++i) {
+		for(int j=1; j<=n; ++j) {
+			cout << setw(8) << left << setfill(' ')<<k[i][j]<<"  ";
+		}
+		cout<<endl;
+	}
+}
+
+void dijkstra(int n, int v, int *distance, int *last, int k[num][num]) {
+	bool visted[num];
+	for(int i=1; i<=n; ++i) {
+		distance[i] = k[v][i];   
+		visted[i] = 0;           
+		if(distance[i] == inf) 
+			last[i] = 0;    
+		else
+			last[i] = v;
+	}
+	distance[v] = 0;
+	visted[v] = 1;
+	for(int i=2; i<=n; ++i) {
+		int temp = inf;
+		int u = v;
+		for(int j=1; j<=n; ++j) {
+			if((!visted[j]) && distance[j]<temp) {
+				u = j;             
+				temp = distance[j];
 			}
 		}
-		s[u] = 1;    // 表示u点已存入S集合中
-		// 更新其他点距离源点 最短距离点的 dist
+		visted[u] = 1;    
 		for(int j=1; j<=n; ++j) {
-			if((!s[j]) && c[u][j]<maxint) {
-				int newdist = dist[u] + c[u][j];
-				if(newdist < dist[j]) {
-					dist[j] = newdist;
-					prev[j] = u;
+			if((!visted[j]) && k[u][j]<inf) {
+				int newdistance = distance[u] + k[u][j];
+				if(newdistance < distance[j]) {
+					distance[j] = newdistance;
+					last[j] = u;
 				}
 			}
 		}
 	}
 }
-void searchPath(int *prev,int v, int u) {
-	int que[maxnum];
-	int tot = 1;
-	que[tot] = u;
-	tot++;
-	int tmp = prev[u];
-	while(tmp != v) {
-		que[tot] = tmp;
-		tot++;
-		tmp = prev[tmp];
+void path(int *last,int first, int aim) {
+	int mark[num];
+	int index = 1;
+	mark[index] = aim;
+	index++;
+	int temp = last[aim];
+	while(temp != first) {
+		mark[index] = temp;
+		index++;
+		temp = last[temp];
 	}
-	que[tot] = v;
-	for(int i=tot; i>=1; --i)
-		if(i != 1)
-			cout << que[i] << " -> ";
-		else
-			cout << que[i] << endl;
+	mark[index] = first;
+	for(int i=index; i>=1; --i) {
+		if(i != 1) {
+			cout << mark[i] << " -> ";
+		} else {
+			cout << mark[i] << endl;
+		}
+	}
 }
-int main() {
-//	freopen("input.txt", "r", stdin);
-	// 各数组都从下标1开始
-	int dist[maxnum];     // 表示当前点到源点的最短路径长度
-	int prev[maxnum];     // 记录当前点的前一个结点
-	int c[maxnum][maxnum];   // 记录图的两点间路径长度
-	int n, line;             // 图的结点数和路径数
-	// 输入结点数
-	cin >> n;
-	// 输入路径数
-	cin >> line;
-	int p, q, len;          // 输入p, q两点及其路径长度
-	// 初始化c[][]为maxint
-	for(int i=1; i<=n; ++i) {
-		for(int j=1; j<=n; ++j) {
-			c[i][j] = maxint;
-		}
-	}
-	for(int i=1; i<=line; ++i) {
-		cin >> p >> q >> len;
-		if(len < c[p][q]) {     // 有重边
-			c[p][q] = len;      // p指向q
-			c[q][p] = len;      // q指向p，这样表示无向图
-		}
-	}
-
-	for(int i=1; i<=n; ++i) {
-		dist[i] = maxint;
-	}
-	for(int i=1; i<=n; ++i) {
-		for(int j=1; j<=n; ++j){
-			printf("%8d", c[i][j]);
-		}
-		printf("\n");
-	}
-
-	Dijkstra(n, 1, dist, prev, c);
-	// 最短路径长度    
-	cout << "源点到最后一个顶点的最短路径长度: " << dist[n] << endl;
-	// 路径    
-	cout << "源点到最后一个顶点的路径为: ";
-	searchPath(prev, 1, n);
-}
-
 
