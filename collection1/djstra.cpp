@@ -50,29 +50,29 @@ void showMatrix(int k[num][num],int n) {
 }
 
 void dijkstra(int n, int v, int *distance, int *last, int k[num][num]) {
-	bool visted[num];
+	bool visited[num];
 	for(int i=1; i<=n; ++i) {
 		distance[i] = k[v][i];   
-		visted[i] = 0;           
+		visited[i] = 0;           
 		if(distance[i] == inf) 
 			last[i] = 0;    
 		else
 			last[i] = v;
 	}
 	distance[v] = 0;
-	visted[v] = 1;
+	visited[v] = 1;
 	for(int i=2; i<=n; ++i) {
 		int temp = inf;
 		int u = v;
 		for(int j=1; j<=n; ++j) {
-			if((!visted[j]) && distance[j]<temp) {
+			if((!visited[j]) && distance[j]<temp) {
 				u = j;             
 				temp = distance[j];
 			}
 		}
-		visted[u] = 1;    
+		visited[u] = 1;    
 		for(int j=1; j<=n; ++j) {
-			if((!visted[j]) && k[u][j]<inf) {
+			if((!visited[j]) && k[u][j]<inf) {
 				int newdistance = distance[u] + k[u][j];
 				if(newdistance < distance[j]) {
 					distance[j] = newdistance;
