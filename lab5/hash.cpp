@@ -13,8 +13,7 @@ typedef struct Data {
 	string phone;
 	string site;
 } Data,*PData;
-//对结构体中的string类必须用new(分配空间和调用构造函数)而不能用malloc()
-//结构体中的数组除了在初始化的时候可以整体用"="赋值，其他情况不能整体赋值。 
+
 typedef struct Node {
 	Data data;
 	struct Node *next;
@@ -210,3 +209,5 @@ void readData(vector<Data> &v) {
 		cout<<i.name<<" "<<i.phone<<" "<<i.site<<endl;
 	}
 }
+//对结构体中的string类必须用new(分配空间和调用构造函数)而不能用malloc()
+//结构体中的数组除了在初始化的时候可以整体用"="赋值，其他情况不能整体赋值。 
