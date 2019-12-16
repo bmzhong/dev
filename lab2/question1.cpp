@@ -35,8 +35,6 @@ Status init(SqStack &S){
     return OK;
 }
 
-
-
 Status converse(SqStack &S){
     int n;
     cin>>n;
