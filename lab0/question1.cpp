@@ -21,11 +21,17 @@ Status sortArray(SqList &L);
 Status insertList(SqList &L,int e);
 int main() {
 	int n,m;
-	cin>>n>>m;
+	cout<<"输入随机数的个数"<<endl;
+	cin>>n;
 	SqList L;
 	initList(L);
 	createArray(L,n);
 	sortArray(L);
+	for(int i=0; i<L.lenth; ++i) {
+		cout<<*(L.elem+i)<<" ";
+	}
+	cout<<endl<<"输入需要插入的数据"<<endl;
+	cin>>m;
 	insertList(L,m);
 	for(int i=0; i<L.lenth; ++i) {
 		cout<<*(L.elem+i)<<" ";

@@ -27,10 +27,12 @@ int main(){
 	initLinkList(La);
 	initLinkList(Lb);
 	int real1,imaginary1,real2,imaginary2;
+	cout<<"分别输入两个复数的实部和虚部"<<endl;
 	cin>>real1>>imaginary1>>real2>>imaginary2;
 	createLNode(La,real1,imaginary1);
 	createLNode(Lb,real2,imaginary2);
 	char symbol;
+	cout<<"输入运算符"<<endl;
 	cin>>symbol;
 	switch(symbol){
 		case '+':

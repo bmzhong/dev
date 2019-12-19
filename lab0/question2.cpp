@@ -24,7 +24,10 @@ Status find(SqList &L,int &t,int m);
 
 int main() {
 	int m,n;
-	cin>>n>>m;
+	cout<<"输入n（人数）"<<endl;
+	cin>>n;
+	cout<<"输入m (报数为m的人退出)"<<endl;
+	cin>>m; 
 	SqList L;
 	initList(L);
 	createArray(L,n);
