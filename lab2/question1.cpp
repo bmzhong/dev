@@ -37,6 +37,7 @@ Status init(SqStack &S){
 
 Status converse(SqStack &S){
     int n;
+    cout<<"输入一个十进制数"<<endl;
     cin>>n;
     ElementType e,t;
     while (n) {
