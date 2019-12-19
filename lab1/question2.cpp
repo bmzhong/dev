@@ -21,6 +21,7 @@ int main(){
 	LinkList L;
 	create(L);
 	int i;
+	cout<<"输入元素个数"<<endl;
 	cin>>i;
 	init(L,i);
 	cout<<"初始化后的遍历输出"<<endl; 
@@ -42,6 +43,7 @@ Status init(LinkList &L,int i){
 	if(i<1) exit(OVERFLOW);
 	create(L);
 	LinkList q=L;
+	cout<<"分别输入每个元素"<<endl;
 	for(int j=0; j<i; ++j) {
 		LinkList p=(LinkList)malloc(sizeof(LNode));
 		p->next=NULL;
