@@ -26,7 +26,7 @@ int main() {
 	end1=GetTickCount();
 	cout<<"时间："<<(end1-start1)/55<<"ms  "<<endl<<endl;
 	start2=GetTickCount();
-	select(b);
+	select(s);
 	end2=GetTickCount();
 	cout<<"时间："<<(end2-start2)/55<<"ms  "<<endl<<endl;
 	start3=GetTickCount();
@@ -73,17 +73,23 @@ void read(vector<int> &b) {
 }
 
 void bubble(vector<int> &b) {
-	int sw=0,move=0,compare=0;
+	int sw=0,move=0,compare=0,flag=0,temp=flag;
 	for(int i=b.size()-1; i>=0; --i) {
 		compare++;
+		temp=flag;
 		for(int j=0; j<i; ++j) {
 			compare++;
 			if(b[j]>b[j+1]) {
 				swap(b[j],b[j+1]);
-				sw++;
+				sw+=3;
+				flag++;
 			}
 			compare++;
 		}
+		if(temp==flag){
+			break;
+		}
+		compare++;
 	}
 	cout<<"冒泡法："<<endl;
 	cout<<"是否有序："<<(is_sorted(b.begin(),b.end())?"是":"否")<<endl;
@@ -99,7 +105,7 @@ void select(vector<int> &s) {
 			compare++;
 			if(s[i]<s[j]) {
 				swap(s[i],s[j]);
-				sw++;
+				sw+=3;
 			}
 			compare++;
 		}
@@ -112,18 +118,19 @@ void select(vector<int> &s) {
 void insert(vector<int> &in) {
 	int sw=0,move=0,compare=0;
 	in.insert(in.begin(),0);
+	move++;
 	int t,i,j;
 	for(i=2; i<=in.size(); ++i) {
 		compare++;
 		in.front()=in[i];
 		move++;
-		t=in[i];
 		for(j=i-1; in.front()<in[j]; --j) {
 			compare++;
 			in[j+1]=in[j];
 			move++;
 		}
 		in[j]=in.front();
+		move++;
 	}
 	cout<<"直接插入法："<<endl;
 	cout<<"是否有序："<<(is_sorted(in.begin(),in.end())?"是":"否")<<endl;
