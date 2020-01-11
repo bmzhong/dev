@@ -19,8 +19,8 @@ int main() {
 		v.push_back(t);
 	}
 	sort(v.begin(),v.end(),cmp);
-	cout<<v[v.size()-1].name<<"  "<<v[v.size()-1].id<<endl;
-	cout<<v[0].name<<"  "<<v[0].id<<endl;
+	cout<<v[v.size()-1].name<<" "<<v[v.size()-1].id<<endl;
+	cout<<v[0].name<<" "<<v[0].id<<endl;
 	return 0;
 }
 
