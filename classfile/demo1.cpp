@@ -1,28 +1,40 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-class Rectangle{
-	public:
-		int w,h;
-	void init(int _w,int _h);
+class Rectangle
+{
+public:
+	int w, h;
+	void init(int _w, int _h);
 	int area();
 	int perimeter();
 };
-void Rectangle::init(int _w,int _h){
-	w=_w;
-	h=_h;
+void Rectangle::init(int _w, int _h)
+{
+	w = _w;
+	h = _h;
 }
-int Rectangle::area(){
-	return w*h;	
+int Rectangle::area()
+{
+	return w * h;
 }
-int Rectangle::perimeter(){
-	return 2*(w+h);
+int Rectangle::perimeter()
+{
+	return 2 * (w + h);
 }
-int main(){
-	int w,h;
+int main()
+{
+	char ww='a';
+	const char yy='d';
+	ww=yy;
+	int w = 5, h = 6;
 	Rectangle r;
-	cin>>w>>h;
-	r.init(w,h);
-	cout<<"area="<<r.area()<<endl;
-	cout<<"primeter="<<r.perimeter()<<endl;
-	return 0;	
+	Rectangle *p = &r;
+	Rectangle &y = r;
+	r.init(w, h);
+	r.w = 10;
+	p->init(3, 4);
+	cout << y.w << endl;
+	cout << p->w << endl;
+	system("pause");
+	return 0;
 }
