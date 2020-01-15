@@ -3,5 +3,6 @@
         "ostream": "cpp",
         "new": "cpp",
         "iostream": "cpp"
-    }
+    },
+    "files.autoGuessEncoding": true
 }

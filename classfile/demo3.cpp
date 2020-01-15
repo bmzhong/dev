@@ -11,7 +11,7 @@ public:
     void f3() const;
     Complex(int _real)
     {
-        cout << "类型转换构造函数" << endl;
+        cout << "构造函数" << endl;
         real = _real;
         imag = 0;
     }
