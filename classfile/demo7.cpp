@@ -9,7 +9,7 @@ class Complex{
     Complex(){}
     Complex(int r,int i){
         real=r;
-        imag=i
+        imag=i;
     }
     operator int(){
         return real;
