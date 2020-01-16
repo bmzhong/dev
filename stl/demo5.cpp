@@ -59,6 +59,7 @@ main()
     p3=find(list2.begin(),list2.end(),121);
     list1.splice(p1,list2,p2,p3);
     print(list1.begin(),list1.end());
+    print(list2.begin(),list2.end());
     system("pause");
     return 0;
 }

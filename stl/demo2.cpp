@@ -13,7 +13,7 @@ int main(){
     advance(i,6);
     advance(i,-2);
     cout<<*i<<endl;
-    cout<<"-----------------"<<endl;
+    cout<<"------------------"<<endl;
     cout<<distance(v.begin(),i)<<endl;
     iter_swap(v.begin(),i);
     cout<<*v.begin()<<endl;
