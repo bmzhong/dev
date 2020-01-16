@@ -26,6 +26,7 @@ bool GreaterA(const A &a1,const A &a2){
     return a1.n>a2.n;
 }
 
+
 struct LessA{
     bool operator () (const A &a1,const A &a2){
         return (a1.n%10)<(a2.n%10);
