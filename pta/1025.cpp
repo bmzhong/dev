@@ -23,7 +23,8 @@ ostream &operator<<(ostream &os, A &a)
 
 int main()
 {
-    int first, n, k;
+    string first;
+    int  n, k;
     cin >> first >> n >> k;
     vector<A> v, p;
     A a;
@@ -33,7 +34,7 @@ int main()
         v.push_back(a);
     }
     int j = n;
-    int next = first;
+    string next = first;
     vector<A>::iterator it;
     while (j > 0)
     {
@@ -42,15 +43,9 @@ int main()
         p.push_back(*it);
         --j;
     }
-    cout<<"++++++++++++++++++++++++++++++"<<endl;
-    for (auto it : p)
-    {
-        cout << it;
-    }
     v.clear();
     int d = n / k;
     j = 0;
-    cout << "------------------------------- " << endl;
     while (j < d)
     {
         int w = 4 + j * k;
