@@ -36,7 +36,7 @@ string func2(double d){
     }else if(d<0){
         r=-1;
         d=(double)-1*d;
-    }
+    }                                         
     if(d-int(d)>0){
         s<<fixed<<setprecision(15)<<d;
         string str;
