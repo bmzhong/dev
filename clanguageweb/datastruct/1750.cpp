@@ -5,16 +5,15 @@ using namespace std;
 int main()
 {
     vector<vector<vector<int> > > h;
-    vector<vector<int> > v;
     int m, n;
     while (cin >> m >> n)
     {
-        vector<vector<int>>().swap(v);
+        vector<vector<int> > v;
+        // vector<vector<int>>().swap(v);
         for (int i = 0; i < m; ++i)
         {
             int sum = 0;
             vector<int> p;
-
             v.push_back(p);
             for (int j = 0; j < n; ++j)
             {
