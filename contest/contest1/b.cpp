@@ -9,7 +9,8 @@ void func(int n,int &s){
         s=1;
         return;
     }else{
-        for(int i=0;i<n;++i){
+        for(int i=1;i<n;++i){
+            func(i,s);
             
         }
     }
