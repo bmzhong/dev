@@ -16,7 +16,7 @@ int main() {
 	for(auto &it:v) {
 		for(int i=0; i<it.size(); ++i) {
 			if(isalpha(it[i])) {
-				if(it[i]>'A'&&it[i]<'Z') {
+				if(it[i]>='A'&&it[i]<='Z') {
 					int dis=it[i]-'A';
 					it[i]='Z'-dis;
 				} else {
@@ -29,6 +29,7 @@ int main() {
 	for(auto &it:v){
 		cout<<it<<endl;
 	}
+	system("pause");
 	return 0;
 }
 
