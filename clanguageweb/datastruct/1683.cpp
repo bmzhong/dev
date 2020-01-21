@@ -141,3 +141,5 @@ int main()
     system("pause");
     return 0;
 }
+
+//注意char类型数字相加和int类型数字相加的结果不同。
