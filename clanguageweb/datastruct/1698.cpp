@@ -96,3 +96,4 @@ void InOrderTranverse(PA &Thr)
         p = p->rchild;
     }
 }
+//88行不要将p->lchild写成了p->rchild。
