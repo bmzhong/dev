@@ -6,11 +6,12 @@ int main()
 {
     string str;
     getline(cin,str);
+    str.insert(0," ");
     int len=str.length();
     int next[len];
     get_next(str,next);
-    for(int i=0;i<len;++i){
-        cout<<next[i]+1<<" ";
+    for(int i=1;i<len;++i){
+        cout<<next[i]<<" ";
     }
     cout<<endl;
     system("pause");
@@ -20,11 +21,11 @@ int main()
 void get_next(string str, int next[])
 {
     int len = str.length();
-    int i = 0, j = -1;
-    next[0] = -1;
-    while (i < len)
+    int i = 1, j = 0;
+    next[1] = 0;
+    while (i <= len-1)
     {
-        if (j == -1 || str[i] == str[j])
+        if (j == 0 || str[i] == str[j])
         {
             ++i;
             ++j;
