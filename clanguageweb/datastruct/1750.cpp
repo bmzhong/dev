@@ -6,10 +6,10 @@ int main()
 {
     vector<vector<vector<int> > > h;
     int m, n;
+    vector<vector<int> > v;
     while (cin >> m >> n)
     {
-        vector<vector<int> > v;
-        // vector<vector<int>>().swap(v);
+        v.clear();        
         for (int i = 0; i < m; ++i)
         {
             int sum = 0;
