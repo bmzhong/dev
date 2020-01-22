@@ -69,6 +69,7 @@ int main()
     int i=0;
     while(i<m.tu){
         select(s,e,m.arr[i].row,m);
+        int a[]
     }
     system("pause");
     return 0;
