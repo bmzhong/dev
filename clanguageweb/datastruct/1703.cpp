@@ -19,6 +19,7 @@ int main()
     for(int k=0;k<pg->vexnum;++k){
         bfs(pg,k);
     }
+    cout<<endl;
     system("pause");
     return 0;
 }
