@@ -18,7 +18,7 @@ int main() {
 	createMatrix(m, t);
 	multiply(m, t, rs);
 	display(rs);
-
+	system("pause");
 	return 0;
 }
 
@@ -27,26 +27,26 @@ void display(B &rs) {
 	for (int i = 0; i < rs.mu; ++i) {
 		for (int j = 0; j < rs.nu; ++j) {
 			if (p<rs.tu&&rs.arr[p].row == i && rs.arr[p].col == j) {
-				printf("%d ",rs.arr[p].data);
+				cout<<rs.arr[p].data<<" ";
 				++p;
 			} else {
-				printf("0 ");
+				cout<<"0 ";
 			}
 		}
-		printf("\n");
+		cout<<endl;
 	}
 }
 
 void createMatrix(B &m, B &t) {
 	int r1, c1, r2, c2, b;
-	scanf("%d %d", &r1, &c1);
+	cin>>r1>>c1;
 	m.mu = r1;
 	m.nu = c1;
 	m.tu = 0;
 	for (int i = 0; i < r1; ++i) {
 		m.cpot[i] = m.tu;
 		for (int j = 0; j < c1; ++j) {
-			scanf("%d", &b);
+			cin>>b;
 			if (b != 0) {
 				A a;
 				a.data = b;
@@ -56,14 +56,14 @@ void createMatrix(B &m, B &t) {
 			}
 		}
 	}
-	scanf("%d %d", &r2, &c2);
+	cin>>r2>>c2;
 	t.mu = r2;
 	t.nu = c2;
 
 	for (int i = 0; i < r2; ++i) {
 		t.cpot[i] = t.tu;
 		for (int j = 0; j < c2; ++j) {
-			scanf("%d", &b);
+			cin>>b;
 			if (b != 0) {
 				A a;
 				a.data = b;
