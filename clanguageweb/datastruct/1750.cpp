@@ -1,52 +1,36 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include<iostream>
+#include<vector>
+#include<algorithm>
 using namespace std;
-int main()
-{
-    vector<vector<vector<int> > > h;
-    int m, n;
-    vector<vector<int> > v;
-    while (cin >> m >> n)
-    {
-        v.clear();        
-        for (int i = 0; i < m; ++i)
-        {
-            int sum = 0;
-            vector<int> p;
-            v.push_back(p);
-            for (int j = 0; j < n; ++j)
-            {
-                int a;
-                cin >> a;
-                sum += a;
-                v[i].push_back(a);
-            }
-            int temp = v[i][n - 1];
-            int pos = n - 1;
-            int k;
-            for (k = n - 1; k >= 0; --k)
-            {
-                if (v[i][k] >= temp)
-                {
-                    temp = v[i][k];
-                    pos = k;
+int main(){
+    int m,n,a;
+    while(cin>>m>>n){
+        vector<vector<int>> h;
+        vector<int> v;
+        for(int i=0;i<m;++i){
+            int sum=0;
+            int t=-99999;
+            int k=0;
+            for(int j=0;j<n;++j){
+                cin>>a;
+                if(a>t){
+                    t=a;
+                    k=j;
                 }
+                sum+=a;
+                v.push_back(a);
             }
-            v[i][k] = sum;
+            v[k]=sum;
+            h.push_back(v);
+            v.clear();
         }
-        h.push_back(v);
-    }
-    for (int i = 0; i < h.size(); ++i)
-    {
-        for (int j = 0; j < h[i].size(); ++j)
-        {
-            for (int k = 0; k < h[i][j].size() - 1; ++k)
-            {
-                cout << h[i][j][k] << " ";
+        for(int i=0;i<m;++i){
+            for(int j=0;j<n;++j){
+                cout<<h[i][j]<<" ";
             }
-            cout << *h[i][j].rbegin() << endl;
+            cout<<endl;
         }
+        h.clear();
     }
     system("pause");
     return 0;
