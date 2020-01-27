@@ -4,7 +4,7 @@ using namespace std;
 int main()
 {
     int n;
-    while (cin >> n)
+    while (cin >> n && n != 0)
     {
         stack<int> s;
         for (int i = 0; i < n; ++i)
