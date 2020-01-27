@@ -5,7 +5,7 @@ void down(int a[], int n, int p);
 int main()
 {
     int n;
-    int a[100000];
+    int a[100001];
     create(a, n);
     int size = n;
     for (int i = 0; i < n; ++i)
