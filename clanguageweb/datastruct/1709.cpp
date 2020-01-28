@@ -47,15 +47,14 @@ void floyd(Graph &G)
 {
     for (int k = 0; k < G.vexnum; ++k)
     {
+
+        for (int i = 0; i < G.vexnum; ++i)
         {
-            for (int i = 0; i < G.vexnum; ++i)
+            for (int j = 0; j < G.vexnum; ++j)
             {
-                for (int j = 0; j < G.vexnum; ++j)
+                if (G.arcs[i][j] > G.arcs[i][k] + G.arcs[k][j])
                 {
-                    if (G.arcs[i][j] > G.arcs[i][k] + G.arcs[k][j])
-                    {
-                        G.arcs[i][j] = G.arcs[i][k] + G.arcs[k][j];
-                    }
+                    G.arcs[i][j] = G.arcs[i][k] + G.arcs[k][j];
                 }
             }
         }

@@ -1,21 +1,34 @@
 #include <iostream>
 using namespace std;
-void func(int n, int &sum);
+int a[1001];
+void func(int n, int i)
+{
+    if (i > n)
+    {
+        return;
+    }
+    else if (i % 2 == 1)
+    {
+        a[i] = a[i - 1];
+    }
+    else
+    {
+        for (int j = 1; j <= i / 2; ++j)
+        {
+            a[i] += a[j];
+        }
+        ++a[i];
+    }
+    ++i;
+    func(n, i);
+}
 int main()
 {
-    int n, sum = 1;
+    int n;
+    a[1] = 1;
     cin >> n;
-    func(n,sum);
-    cout<<sum<<endl;
+    func(n, 2);
+    cout << a[n] << endl;
     system("pause");
     return 0;
-}
-
-void func(int n, int &sum)
-{
-    for (int i = 1; i <= n / 2; ++i)
-    {
-        sum++;
-        func(i, sum);
-    }
 }
