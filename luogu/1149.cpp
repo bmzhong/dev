@@ -56,7 +56,7 @@ int main()
         {
             ++sum;
         }
-        else if (x == 5 && y == 5 && e != 5 &&)
+        else if (x == 5 && y == 5 && e != 5 )
         {
         }
     }
