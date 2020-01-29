@@ -10,9 +10,10 @@ int main()
     cin >> n;
     string str;
     vector<string> v;
+    cin.get();
     for (int i = 0; i < n; ++i)
     {
-        cin >> str;
+        getline(cin,str);
         if (func(str))
         {
             v.push_back("Yes");
@@ -23,12 +24,15 @@ int main()
     for(int i=0;i<n;++i){
         cout<<v[i]<<endl;
     }
-    system("pause");
+   system("pause");
     return 0;
 }
 
 bool func(string str)
 {
+    if(str==""){
+        return true;
+    }
     stack<char> s;
     char ch;
     int len = str.length();
@@ -80,5 +84,10 @@ bool func(string str)
         {
             return false;
         }
+    }
+    if(s.empty()){
+        return true;
+    }else{
+        return false;
     }
 }
