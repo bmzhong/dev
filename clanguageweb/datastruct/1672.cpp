@@ -1,134 +1,85 @@
 #include <iostream>
-#include <stack>
-#include <vector>
+#include <queue>
 #include <algorithm>
 using namespace std;
-void write(vector<vector<char>> &h, int n, int m);
-void handle(vector<vector<char>> &h, int &r, int n, int m);
+const int inf = 999999;
+int  d[102][102];
+char a[102][102];
+int n, m;
+pair<int, int> s, e;
+int dx[4] = {1, 0, 0, -1}, dy[4] = {0, 1, -1, 0};
+void init();
+void bfs();
 int main()
 {
-    vector<int> re;
-    vector<vector<char>> h;
     int t;
     cin >> t;
-    int m, n, r = 0;
     for (int i = 0; i < t; ++i)
     {
-        r = 0;
         cin >> n >> m;
-        write(h, n, m);
-        handle(h, r, n, m);
-        re.push_back(r);
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j < m; ++j)
+            {
+                cin >> a[i][j];
+            }
+        }
+        init();
+        bfs();
+        if (d[e.first][e.second] == inf)
+        {
+            cout << "-1" << endl;
+        }
+        else
+        {
+            cout << d[e.first][e.second] << endl;
+        }
     }
     system("pause");
     return 0;
 }
 
-void handle(vector<vector<char>> &h, int &r, int n, int m)
+void init()
 {
-    r = 0;
-    int s = 0, e, flag = 0;
-    pair<int, int> p, p1, p2;
-    for (int i = 1; i <= n; ++i)
+    for (int i = 0; i < n; ++i)
     {
-        for (int j = 1; j <= m; ++j)
+        for (int j = 0; j < m; ++j)
         {
-            if (h[i][j] == 'S')
+            if (a[i][j] == 'S')
             {
-                flag = 1;
-                p.first = i;
-                p.second = j;
-                break;
+                s.first = i;
+                s.second = j;
             }
-        }
-        if (flag == 1)
-        {
-            break;
-        }
-    }
-    int d = 0;
-    flag = 0;
-    stack<pair<int, int>> st;
-    st.push(p);
-    int i = p.first, j = p.second;
-    while (!st.empty())
-    {
-        flag = 0;
-        p2 = p1;
-        if (h[i][j] == 'E')
-        {
-            break;
-        }
-        else if (h[i][j + 1] == '-' && d != 3)
-        {
-            ++j;
-            p1.first = i;
-            p1.second = j;
-            st.push(p1);
-            flag = 1;
-            d = 1;
-        }
-        else if (h[i + 1][j] == '-' && d != 4)
-        {
-            ++i;
-            p1.first = i;
-            p1.second = j;
-            st.push(p1);
-            flag = 1;
-            d = 2;
-        }
-        else if (h[i][j - 1] == '-' && d != 1)
-        {
-            --j;
-            p1.first = i;
-            p1.second = j;
-            st.push(p1);
-            flag = 1;
-            d = 3;
-        }
-        else if (h[i - 1][j] == '-' && d != 2)
-        {
-            --i;
-            p1.first = i;
-            p1.second = j;
-            st.push(p1);
-            flag = 1;
-            d = 4;
-        }
-        if (flag == 0)
-        {
-            h[i][j] = '#';
-            st.pop();
-            if (!st.empty())
+            if (a[i][j] == 'E')
             {
-                i = st.top().first;
-                j = st.top().second;
+                e.first = i;
+                e.second = j;
             }
+            d[i][j] = inf;
         }
     }
 }
 
-void write(vector<vector<char>> &h, int n, int m)
+void bfs()
 {
-    vector<char> v;
-
-    char a;
-    v.assign(m + 2, '#');
-    h.push_back(v);
-    v.clear();
-    for (int j = 0; j < n; ++j)
+    pair<int, int> p;
+    queue<pair<int, int>> q;
+    q.push(s);
+    d[s.first][s.second] = 0; //这里不是d[0][0]=0;而是起点坐标的d为0.
+    while (!q.empty())
     {
-        v.push_back('#');
-        for (int k = 0; k < m; ++k)
+        p = q.front();
+        q.pop();
+        if (p.first == e.first && p.second == e.second)
+            break;
+        for (int i = 0; i < 4; ++i)
         {
-            cin >> a;
-            v.push_back(a);
+            int px = p.first + dx[i], py = p.second + dy[i];
+            if (px >= 0 && px < n && py >= 0 && py < m && d[px][py] == inf && a[px][py] != '#')
+            {
+                d[px][py] = d[p.first][p.second] + 1;
+                q.push(make_pair(px, py));
+            }
         }
-        v.push_back('#');
-        h.push_back(v);
-        v.clear();
     }
-    v.assign(m + 2, '#');
-    h.push_back(v);
-    v.clear();
 }
