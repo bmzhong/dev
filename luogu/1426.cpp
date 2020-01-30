@@ -6,34 +6,49 @@ int main()
     cin >> s >> x;
     double d1 = s - x, d2 = s + x, m = 0;
     double speed = 7.0;
-    while (true)
+    if (s <= x)
     {
-        m += speed;
-
-        if (m < d1)
+        if (7 > d2)
         {
-            continue;
+            cout << "n" << endl;
         }
-        else if (m >= d1 && m <= d2)
+        else
         {
-            double yd = m - d1;
-            double yt = yd / speed;
-            speed *= 0.98;
-            double hsd = d2 - m;
-            if (m + speed > hsd)
+            cout << "y" << endl;
+        }
+    }
+    else
+    {
+        while (true)
+        {
+            m += speed;
+            if (m < d1)
             {
-                cout << "n" << endl;
+            }
+            else if (m >= d1 && m <= d2)
+            {
+                double yd = m - d1;
+                double yt = yd / speed;
+                speed *= 0.98;
+                double f = (1 - yt) * speed;
+                if (m + f > d2)
+                {
+                    cout << "n" << endl;
+                }
+                else
+                {
+                    cout << "y" << endl;
+                }
+                break;
             }
             else
             {
-                cout << "y" << endl;
+                cout << "n" << endl;
             }
-            break;
-        }else{
-            cout<<"n"<<endl;
+            speed *= 0.98;
         }
-        speed *= 0.98;
     }
+
     system("pause");
     return 0;
 }
