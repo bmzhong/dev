@@ -8,22 +8,16 @@ int main()
     cin >> str1 >> str2;
     int pos1, pos2;
     int count = 0;
-    int len = str1.size();
-    while (str1 != str2)
+    int n = str1.size();
+    for (int i = 0; i < n - 1; ++i)
     {
-        pair<string::iterator, string::iterator> p = mismatch(str1.begin(), str1.end(), str2.begin());
-        pos1 = distance(str1.begin(), p.first);
-        str1[pos1] = str2[pos1];
-        if (pos1 + 1 < len)
-        {
-            str1[pos1 + 1] = str2[pos1 + 1];
-            ++count;
-        }else{
-            cout<<"false"<<endl;
-            break;
+        if (str1[i] != str2[i] && str1[i + 1] != str2[i + 1]){
+            str1[i]=str2[i];
+            str1[i+1]=str2[i+1];
+            count++;
         }
     }
-    cout<<count<<endl;
+    cout << count << endl;
     system("pause");
     return 0;
 }
