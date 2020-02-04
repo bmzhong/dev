@@ -1,51 +1,46 @@
 #include <iostream>
 #include <stdio.h>
-void func1(int x, int y, int *sum);
-int v[500000];
+using namespace std;
+int a[1000000], b[1000000];
+int n;
+long long sum = 0;
+void merge_sort(int x, int y);
 int main()
 {
-    int n, x;
     scanf("%d", &n);
     for (int i = 0; i < n; ++i)
     {
-        scanf("%d", &x);
-        v[i] = x;
+        scanf("%d", &a[i]);
     }
-    int sum = 0;
-    func1(0, n - 1, &sum);
-    printf("%d\n", sum);
+    merge_sort(0, n);
+    printf("%lld\n", sum);
     system("pause");
     return 0;
 }
 
-void func1(int x, int y, int *sum)
+void merge_sort(int x, int y)
 {
-    if (y == x)
-    {
-        return;
-    }
-    int m;
     if (y - x > 1)
     {
-        m = x + (y - x) / 2;
-        func1(x, m - 1, sum);
-        func1(m, y, sum);
-        for (int i = m; i <= y; ++i)
+        int m = x + (y - x) / 2;
+        merge_sort(x, m);
+        merge_sort(m, y);
+        int i = x, j = m, k = x;
+        while (i < m || j < y)
         {
-            for (int j = x; j < m; ++j)
+            if (j >= y || (i < m && a[i] <= a[j]))
+                b[k++] = a[i++];
+            else
             {
-                if (v[j] > v[i])
-                {
-                    ++(*sum);
-                }
+                b[k++] = a[j++];
+                sum += m - i;
             }
         }
-    }
-    else if (y - x == 1)
-    {
-        if (v[x] > v[y])
+        k = x;
+        while (k < y)
         {
-            ++(*sum);
+            a[k] = b[k];
+            ++k;
         }
     }
 }

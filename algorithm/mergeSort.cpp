@@ -1,41 +1,45 @@
 #include <iostream>
 using namespace std;
-void mergesort(int SR[], int TR[], int x, int y);
+int a[100000000], b[100000000];
+int n;
+void merge_sort(int x, int y);
 int main()
 {
-    int n, c;
-    cin>>n;
-    int a[1000], b[1000];
+    cin >> n;
     for (int i = 0; i < n; ++i)
     {
-        cin >> c;
-        a[i] = c;
+        cin >> a[i];
     }
-    mergesort(a,b,0,n-1);
-    for(int i=0;i<n-1;++i){
-        cout<<a[i]<<" ";
+    merge_sort(0, n);
+    for (int i = 0; i < n; ++i)
+    {
+        cout << a[i] << " ";
     }
-    cout<<a[n-1]<<endl;
+    cout << endl;
     system("pause");
     return 0;
 }
 
-void mergesort(int SR[], int TR[], int x, int y)
+void merge_sort(int x, int y)
 {
-    if (x == y)
-        TR[x] = SR[y];
-    else
+    if (y-x>1)
     {
         int m = x + (y - x) / 2;
-        mergesort(SR, TR, x, m);
-        mergesort(SR, TR, m + 1, y);
-        int p=x,q=m+1,k=x;
-        while(p<=m||q<=y){
-            if(q>y||(p<=m&&SR[p]<=SR[q])) TR[k++]=SR[p++];
-            else TR[k++]=SR[q++];
+        merge_sort(x, m);
+        merge_sort(m, y);
+        int i = x, j = m, k = x;
+        while (i < m || j < y)
+        {
+            if (j >= y || (i < m && a[i] < a[j]))
+                b[k++] = a[i++];
+            else
+                b[k++] = a[j++];
         }
-        for(k=x;k<=y;++k){
-            SR[k]=TR[k];
+        k = x;
+        while (k < y)
+        {
+            a[k] = b[k];
+            ++k;
         }
     }
 }
