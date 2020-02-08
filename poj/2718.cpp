@@ -1,13 +1,10 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
-
 using namespace std;
 int a[11], b[6], c[6], N, x, y, mins = 9999999, r1, r2;
 bool visited[11];
-
 void dfs(int n, int k);
-
 int main() {
     int line;
     cin >> line;
@@ -28,7 +25,6 @@ int main() {
         y = N - x;
         dfs(N, x);
         cout << mins << endl;
-        cout << r1 << " " << r2 << endl;
     }
     system("pause");
     return 0;
