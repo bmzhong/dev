@@ -48,7 +48,6 @@ int main()
         }
         printf("%d\n", res);
     }
-
     system("pause");
     return 0;
 }
