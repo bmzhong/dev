@@ -27,7 +27,10 @@ int main()
             }
         }
     }
+    if(dp[n][m]>0)
     printf("%d\n", dp[n][m]);
+    else
+    printf("><\n");
     system("pause");
     return 0;
 }
