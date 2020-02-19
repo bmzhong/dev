@@ -1,29 +1,47 @@
 #include <iostream>
-#include <algorithm>
+#include <cstring>
 #include <cstdio>
 using namespace std;
-int dp[101];
-pair<int, int> p[101];
-bool cmp(const pair<int, int> &p1, const pair<int, int> &p2)
-{
-    if (p1.first == p2.first)
-        return p1.second > p2.second;
-    return p1.first > p2.first;
-}
+const int inf = 1 << 20;
+int dp[200001], n, s[104], f[101], res;
 int main()
 {
-    int n, sum = 0, ss = 0, sf = 0;
+    for(int i=0;i<=200000;++i){
+        dp[i]=-inf;
+    }
+    dp[100000] = 0;
     scanf("%d", &n);
     for (int i = 1; i <= n; ++i)
     {
-        scanf("%d%d", &p[i].first, &p[i].second);
+        scanf("%d%d", &s[i], &f[i]);
     }
-    sort(p + 1, p + n + 1, cmp);
-    if (p[1].first > 0 && p[0].second > 0){
-        
-    }
-        for (int i = 1; i <= n; ++i)
+    for (int i = 1; i <= n; ++i)
+    {
+        if (s[i] > 0)
         {
-            if ()
+            for (int j = 200000; j >= s[i]; --j)
+            {
+                if (dp[j - s[i]] > -inf)
+                    dp[j] = max(dp[j], dp[j - s[i]] + f[i]);
+            }
         }
+        else
+        {
+            for (int j = s[i]; j-s[i] <= 200000; ++j)
+            {
+                if (dp[j - s[i]] > -inf)
+                {
+                    dp[j] = max(dp[j], dp[j - s[i]] + f[i]);
+                }
+            }
+        }
+    }
+    for (int i = 100000; i <= 200000; ++i)
+    {
+        if (dp[i] > 0)
+            res = max(res, dp[i] + i - 100000);
+    }
+    printf("%d\n",res);
+    system("pause");
+    return 0;
 }
