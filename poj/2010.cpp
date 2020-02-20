@@ -4,8 +4,8 @@
 #include <algorithm>
 using namespace std;
 const int inf = 0x3f3f3f3f;
-pair<int, int> p[20001];
-int lower[20001], upper[20001], c, n, f, res = -1;
+pair<int, int> p[100001];
+int lower[100001], upper[100001], c, n, f, res = -1;
 priority_queue<int> q1, q2;
 int main()
 {
