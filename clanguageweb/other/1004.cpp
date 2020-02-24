@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
-int func(int n);
-int a[60] = {0};
+int a[60];
 int main()
 {
     int n;
