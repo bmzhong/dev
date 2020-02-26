@@ -10,7 +10,7 @@ int main()
     }
     for (int i = 0; i <= 9; ++i)
     {
-        cout << i << " " << i << " 0x" << hex << i + 48 << endl;
+        cout << i << " " << i+48 << " 0x" << hex << i + 48 << endl;
     }
     //打印其他可打印字符
     for (int i = 32; i <= 126; ++i)
