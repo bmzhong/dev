@@ -6,16 +6,6 @@
 using namespace std;
 int main()
 {
-//    list<int> v = {1, 1, 1, 1, 1, 2, 1, 1};
-//    while (next_permutation(v.begin(), v.end()))
-//    {
-//        for (auto i = v.begin(); i != v.end(); ++i)
-//        {
-//            cout << *i << " ";
-//        }
-//        cout << endl;
-//    }
-	cout<<atoi("22222222222224")<<endl;
-    system("pause");
+	cout<<atoi("10e+7")<<endl;
     return 0;
 }
