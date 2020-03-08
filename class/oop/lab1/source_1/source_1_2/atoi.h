@@ -1,8 +1,10 @@
-#pragma once
+#ifndef _atoi
+#define _atoi
 
-#include<string>
+#include <string>
 
-using namespace std;
+namespace my_atoi
+{
 
 enum Classify
 {
@@ -12,16 +14,22 @@ enum Classify
 	Error = 0
 };
 
-int decimal(const char* str);
+long long decimal(const char *str);
 
-int octonary(const char* str);
+long long octonary(const char *str);
 
-int hex(const char* str);
+long long hex(const char *str);
 
-const char* tranform(const char* str, int* symbol);
+std::string tranform(const char *str, int *symbol);
 
-Classify classify(const char* str);
+Classify classify(const char *str);
 
-int fetch_power(string string1, int pos);
+long long fetch_power(std::string string1, int pos);
 
-int handle_error(const char* str);
+long long handle_error(const char *str);
+
+int atoi(const char *str);
+
+} // namespace my_atoi
+
+#endif

@@ -1,16 +1,15 @@
-#include <map>
 #include <string.h>
 #include <string>
-#include <atoi.h>
+#include "atoi.h"
 using namespace std;
 
 #define max_int 2147483647
 #define min_int -2147483648
 
-int decimal(const char *str)
+long long my_atoi::decimal(const char *str)
 {
 	int len = strlen(str);
-	int num = 0;
+	long long num = 0;
 	for (int i = 0; i < len; ++i)
 	{
 		int temp = str[i] - '0';
@@ -19,10 +18,10 @@ int decimal(const char *str)
 	return num;
 }
 
-int octonary(const char *str)
+long long my_atoi::octonary(const char *str)
 {
 	int len = strlen(str);
-	int num = 0;
+	long long num = 0;
 	int rec = 1;
 	for (int i = len - 1; i > 0; --i)
 	{
@@ -32,31 +31,23 @@ int octonary(const char *str)
 	return num;
 }
 
-int hex(const char *str)
+long long my_atoi::hex(const char *str)
 {
 	int len = strlen(str);
-	int num = 0;
+	long long num = 0;
 	int rec = 1;
-	map<char, int> m;
-	for (int i = 0; i <= 9; ++i)
-	{
-		char temp = char(i + '0');
-		m[temp] = i;
-	}
-	for (int i = 0; i < 6; ++i)
-	{
-		char temp = char('a' + i);
-		m[temp] = 10 + i;
-	}
 	for (int i = len - 1; i > 1; --i)
 	{
-		num = num + (str[i] - '0') * rec;
+		if (isdigit(str[i]))
+			num = num + (str[i] - '0') * rec;
+		else
+			num = num + (str[i] - 'a' + 10) * rec;
 		rec = rec * 16;
 	}
 	return num;
 }
 
-const char *tranform(const char *str, int *symbol)
+string my_atoi::tranform(const char *str, int *symbol)
 {
 	string string1 = "";
 	int len = strlen(str);
@@ -107,10 +98,10 @@ const char *tranform(const char *str, int *symbol)
 			++i;
 		}
 	}
-	return string1.c_str();
+	return string1;
 }
 
-Classify classify(const char *str)
+my_atoi::Classify my_atoi::classify(const char *str)
 {
 	int len = strlen(str);
 	string temp = str;
@@ -119,42 +110,49 @@ Classify classify(const char *str)
 		string1 = temp.substr(1);
 	else
 		string1 = temp;
-	if ((isdigit(string1[0]) && string1[0] != 0) || (len == 1 && string1[0] == 0))
+	if (len > 10)
+		return Error;
+	if ((isdigit(string1[0]) && string1[0] != '0') || (len == 1 && string1[0] == '0'))
 	{
 		int pos = string1.find_first_not_of("0123456789");
 		if (pos == string::npos)
 			return Dec;
 	}
-	if (string1[0] == 0)
+	if (string1[0] == '0')
 	{
 		int pos = string1.find_first_not_of("01234567");
 		if (pos == string::npos)
 			return Oct;
 	}
-	if (string1[0] == 0 && string1[1] == 'x')
+	if (string1[0] == '0' && string1[1] == 'x')
 	{
-		int pos = string1.find_first_not_of("0123456789abcdef");
+		int pos = string1.find_first_not_of("0123456789abcdef", 2);
 		if (pos == string::npos)
 			return Hex;
 	}
 	return Error;
 }
 
-int fetch_power(string string1, int pos)
+long long my_atoi::fetch_power(string string1, int pos)
 {
 	int pos1 = string1.find_first_not_of("0123456789", pos + 1);
 	if (pos1 != string::npos)
 	{
 		string string3 = string1.substr(pos + 2, pos1 - (pos + 2));
 		if (string3.length() > 0 && string3[0] != '0')
-		{
 			return decimal(string3.c_str());
-		}
 	}
+	else
+	{
+		string string3 = string1.substr(pos + 1);
+		if (string3.length() > 0)
+			return decimal(string3.c_str());
+	}
+
 	return 0;
 }
 
-int handle_error(const char *str)
+long long my_atoi::handle_error(const char *str)
 {
 	int len = strlen(str);
 	long long num = 0;
@@ -173,27 +171,30 @@ int handle_error(const char *str)
 	if (pos != string::npos)
 	{
 		if ((string1[pos] == '+' || string1[pos] == '-') && pos + 1 < len && string1[pos + 1] == 'e')
-
 			exp = fetch_power(string1, pos + 1);
 		else if (string1[pos] == 'e')
-
 			exp = fetch_power(string1, pos);
 	}
 	if (exp)
 	{
-		if (string1[pos] == '+' || string1[pos] == 'e')
+		int power = 1 ;
+		for (int i = 0; i < exp; ++i)
 		{
-			if (num * exp <= max_int && num * exp >= min_int)
-				return num * exp;
+			power = power * 10;
+		}
+		if (pos+1<len && string1[pos+1] == '+')
+		{
+			if (num * power <= max_int && num * power >= min_int)
+				return num * power;
 			else
 				return num;
 		}
-		else if (string1[pos] == '-')
+		else if (pos+1<len && string1[pos+1] == '-')
 		{
-			if (num / exp == 0)
+			if (num / power == 0)
 				return num;
 			else
-				return num / exp;
+				return num / power;
 		}
 	}
 	if (num > max_int)
@@ -203,22 +204,35 @@ int handle_error(const char *str)
 	return num;
 }
 
-int atoi(const char *str)
+int my_atoi::atoi(const char *str)
 {
 	int symbol = 1;
-	const char *ch = tranform(str, &symbol);
+	long long num = 0;
+	string string1 = tranform(str, &symbol);
+	const char *ch = string1.c_str();
 	Classify flag = classify(ch);
 	switch (flag)
 	{
 	case Dec:
-		return decimal(ch);
+		num = decimal(ch);
+		break;
 	case Oct:
-		return octonary(ch);
+		num = octonary(ch);
+		break;
 	case Hex:
-		return hex(ch);
+		num = hex(ch);
+		break;
 	case Error:
-		return handle_error(ch);
+		num = handle_error(ch);
+		break;
 	default:
-		return 0;
+		num = 0;
 	}
+	if (symbol == -1)
+		num = -num;
+	if (num > max_int)
+		return max_int;
+	if (num < min_int)
+		return min_int;
+	return num;
 }

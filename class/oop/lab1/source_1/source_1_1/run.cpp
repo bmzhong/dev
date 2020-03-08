@@ -12,7 +12,7 @@
  */
 
 #include<iostream>
-#include"Info.h"
+#include "Info.h"
 #include<map>
 #include <string>
 using namespace std;

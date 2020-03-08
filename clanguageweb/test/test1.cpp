@@ -6,6 +6,8 @@
 using namespace std;
 int main()
 {
-	cout<<atoi("10e+7")<<endl;
+	char * ch = new char[1000];
+	itoa(-2147483648,ch,10);
+	cout<<abs(-2147483648)<<endl;
     return 0;
 }
