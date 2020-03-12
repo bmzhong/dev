@@ -101,7 +101,7 @@ long long my_itoa::complent(int num)
     return param + num;
 }
 
-char *my_itoa::itoa(int i, char b[], int base)
+char *my_itoa::itoa(int i, char b[], int base = 10)
 {
     int len = 0;
     if (base == 10)

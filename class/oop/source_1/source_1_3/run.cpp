@@ -6,10 +6,11 @@ using namespace std;
 int main()
 {
     int test;
-    while (cin >> test)
+    int base;
+    while (cin >> test >> base)
     {
         char ch[100];
-        my_itoa::itoa(test, ch, 8);
+        my_itoa::itoa(test, ch, base);
         cout << ch << endl;
     }
 
