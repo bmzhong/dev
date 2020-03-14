@@ -12,12 +12,12 @@
  */
 
 #include<iostream>
-#include "Info.h"
+#include "Info.cpp"
 #include<map>
 #include <string>
 using namespace std;
 
-map<string, Info> m;//通过全局变量m来储存输入的数据
+map<string, Info> table;//通过全局变量table来储存输入的数据
 
 int main()
 {
@@ -26,8 +26,8 @@ int main()
 	
 	while(cin>>name>>value)//Windos 下以ctrl+z结束输入
 	{
-		m[name].sum =m[name].sum+value;//当name第一次出现时，m[name]的值会调用无参构造函数初始化sum和count为0；
-		++m[name].count;
+		table[name].sum =table[name].sum+value;//当name第一次出现时，table[name]的值会调用无参构造函数初始化sum和count为0；
+		++table[name].count;
 	}
 
 	double all_sum = 0;  //所有name对应的value总和；
@@ -36,7 +36,7 @@ int main()
 	
 	//输出每个name的value的总和和平均值,并计算all_sum,all_count。
 	cout << "按名字小计：" << endl;
-	for(auto it:m)
+	for(auto it:table)
 	{
 		cout << it.first << " 总和: " << it.second.sum << " 平均值：" << it.second.sum / it.second.count << endl;
 		all_count += it.second.count;

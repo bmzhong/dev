@@ -8,10 +8,10 @@ namespace my_atoi
 
 enum Classify
 {
-	Oct = 8,
-	Dec = 10,
-	Hex = 16,
-	Error = 0
+	Oct = 8, //八进制整数字面量
+	Dec = 10,//十进制整数字面量
+	Hex = 16,//十六进制整数字面量
+	Error = 0//非法的字符串
 };
 
 long long decimal(const char *str);
