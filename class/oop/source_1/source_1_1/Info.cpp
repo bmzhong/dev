@@ -13,7 +13,7 @@
 
 
 #include "Info.h"
-
+//sum和count初始化为0
 Info::Info()
 {
 	sum = 0;
