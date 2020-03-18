@@ -15,7 +15,7 @@ int bisearch(int a[], int x, int y, int v)
     int i = x, j = y, m;
     while (i < y)
     {
-        m = x + (y - x) / 2+;
+        m = x + (y - x) / 2;
         if (a[m] == v)
             return m;
         else if (a[m] > v)
