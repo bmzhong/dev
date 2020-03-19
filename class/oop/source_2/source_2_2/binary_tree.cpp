@@ -1,3 +1,14 @@
+/*
+ * 文件描述：
+ *		   输入word，创建二叉树，先序中序输出，删除二叉树
+ * 姓名:
+ *		   钟保明
+ * 学号:
+ *		   18070100017
+ * 日期:
+ *		   2020/03/19
+ *
+ */
 #include <iostream>
 #include <string>
 #include "btree.cpp"
