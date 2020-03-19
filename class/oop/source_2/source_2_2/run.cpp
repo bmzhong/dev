@@ -16,14 +16,16 @@ using namespace Btree;
 PNode root = 0; //二叉树的根节点
 int main()
 {
-    string str;//输入的单词
+    string str; //输入的单词
     //将输入的单词存储到树中
     while (cin >> str)
         insert(root, str);
     cout << endl;
     //先序遍历输出
+    cout << "先序遍历输出： " << endl;
     preOrder(root, 0);
     //中序遍历输出
+    cout << "中序遍历输出： " << endl;
     midOrder(root);
     //删除树中的所有节点
     delete_tree(root);

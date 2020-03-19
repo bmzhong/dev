@@ -14,9 +14,9 @@
 //判断是否是闰年
 bool _Date_::leap_year(int year)
 {
-    if (year % 4 && !year % 100) //被4整除不被100整除为闰年
+    if (! (year % 4) && year % 100) //被4整除不被100整除为闰年
         return true;
-    if (year % 400) //被400整数位闰年
+    if (! (year % 400)) //被400整数位闰年
         return true;
     return false; //其他为平年
 }
@@ -24,16 +24,16 @@ bool _Date_::leap_year(int year)
 //传入年份、月份得到当月的天数
 int _Date_::get_days(int year, int month)
 {
-    //月份为1、3、5、7、8、10、12为31天
+    //月份为1、3、5、7、8、10、12返回31天
     if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
         return 31;
-    //月份为4、6、9、11为30天
+    //月份为4、6、9、11返回30天
     if (month == 4 || month == 6 || month == 9 || month == 11)
         return 30;
-    //月份为2且是闰年为29天
+    //月份为2且是闰年返回29天
     if (leap_year(year))
         return 29;
-    //月份为2且是平年为28天
+    //月份为2且是平年返回28天
     else
         return 28;
 }
@@ -45,7 +45,7 @@ void _Date_::input(Date &date)
 //输出日期
 void _Date_::display(const Date &date)
 {
-    cout << "year: " << date.year << " month: " << date.month << " day: " << date.day << endl;
+    cout << "    " <<date.year << "/" << date.month << "/" << date.day << endl;
 }
 //增加一天后的新日期
 void _Date_::add_a_day(Date &date)
@@ -102,13 +102,7 @@ void _Date_::add_a_month(Date &date)
         ++date.year;
         //月份变为1
         date.month = 1;
-        //获取进入新的一年后的第一个月的总天数
-        int days = get_days(date.year, date.month);
-        //如果day的数值大于days，则day赋值为days,反之day不变
-        if (days < date.day)
-        {
-            date.day = days;
-        }
+        //date.day不变，因为1月和12月总天数一样多
     }
 }
 //增加一年后的新日期

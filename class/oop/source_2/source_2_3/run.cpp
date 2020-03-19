@@ -1,6 +1,6 @@
 /*
  * 文件描述：
- *		   测试Date类型的相关操作。
+ *		   测试error函数
  * 姓名:
  *		   钟保明
  * 学号:
@@ -9,13 +9,14 @@
  *		   2020/03/19
  *
  */
+
 #include <iostream>
-#include "date.cpp"
-using namespace _Date_;
+#include "error.cpp"
+using namespace std;
+
 int main()
 {
-    Date date = {1700, 1, 1};
-    int week = get_week(date);
+    Error::error("%d","dsds");
     system("pause");
     return 0;
 }
