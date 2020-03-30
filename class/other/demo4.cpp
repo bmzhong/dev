@@ -9,7 +9,7 @@ public:
 public:
     CTyre(int _radius, int _width) : radius(_radius), width(_width) {}
     CTyre(CTyre &c){
-        cout<<"æˆ‘æ˜¯CTyreçš„å¤åˆ¶æž„é€ å‡½æ•°"<<endl;
+        cout<<"ÎÒÊÇCTyreµÄ¸´ÖÆ¹¹Ôìº¯Êý"<<endl;
     }
 };
 
@@ -35,6 +35,7 @@ CCar::CCar(int p,int r,int w):price(p),tyre(r,w){
 int main(){
     CCar c(1,2,3),c1(c);
     cout<<c1.getRadius()<<endl;
+    cout<<"Äã»¹"<<endl;
     system("pause");
     return 0;
 }
