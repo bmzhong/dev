@@ -89,6 +89,5 @@
         "xloctime": "cpp",
         "xstddef": "cpp",
         "xtr1common": "cpp"
-    },
-    "files.autoGuessEncoding": true
+    }
 }

@@ -11,7 +11,7 @@
  *
  */
 #include <iostream>
-#include "itoa.cpp"
+#include "itoa.h"
 
 using namespace std;
 

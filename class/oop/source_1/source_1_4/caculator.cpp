@@ -1,12 +1,12 @@
 /*
- * æ–‡ä»¶æè¿°ï¼š
- *		   å£°æ˜å’Œå®ç°äº†è¡¨è¾¾å¼è¾“å…¥ã€è®¡ç®—ç­‰ç›¸å…³å‡½æ•°ï¼Œå¹¶ç”¨äºæµ‹è¯•ä½¿ç”¨ã€‚		   
+ * ÎÄ¼şÃèÊö£º
+ *		   ÉùÃ÷ºÍÊµÏÖÁË±í´ïÊ½ÊäÈë¡¢¼ÆËãµÈÏà¹Øº¯Êı£¬²¢ÓÃÓÚ²âÊÔÊ¹ÓÃ¡£		   
  *
- * å§“å:
- *		   é’Ÿä¿æ˜
- * å­¦å·:
+ * ĞÕÃû:
+ *		   ÖÓ±£Ã÷
+ * Ñ§ºÅ:
  *		   18070100017
- * æ—¥æœŸ:
+ * ÈÕÆÚ:
  *		   2020/03/04
  *
  */
@@ -21,40 +21,40 @@ using namespace std;
 enum Token {
     NAME,NUMBER,END,ERROR,PLUS = '+',MINUS = '-',MUL = '*',DIV = '/',PRINT = ';',ASSIGN = '=',LP = '(',RP = ')'
 };
-const double flag = 6.666666;//å‡ºç°äº†è¿™ä¸ªæ•°å­—è¡¨ç¤ºè¿™ä¸ªä½ç½®æ˜¯æ“ä½œç¬¦çš„ä½ç½®
-stack<char> temp_stack;//å°†ä¸­ç¼€è¡¨è¾¾å¼è½¬æ¢ä¸ºåç¼€è¡¨è¾¾å¼ç”¨çš„ä¸´æ—¶æ ˆ
-stack<double> calcu;//è®¡ç®—åç¼€è¡¨è¾¾å¼æ—¶å‚¨å­˜æ•°å­—çš„æ ˆ
-vector<double> number;//å‚¨å­˜åç¼€è¡¨è¾¾å¼ç”¨çš„å‘é‡
-vector<char> operate;//å‚¨å­˜åç¼€è¡¨è¾¾å¼ä¸­çš„æ“ä½œç¬¦ç”¨çš„å‘é‡
-map<char, int> m;//å‚¨å­˜æ“ä½œç¬¦åŠå…¶ä¼˜å…ˆçº§çš„å¯¹åº”å…³ç³»
-map<string, double> table;//å‚¨å­˜å˜é‡åŠå…¶å€¼
-Token curr_tok = PRINT;//å‚¨å­˜å½“å‰çš„è½¬æ€
-double number_value = 0;//å‚¨å­˜å½“å‰è¯»å–çš„å€¼
-string string_value;//å‚¨å­˜å½“å‰è¯»å–çš„å˜é‡å
+const double flag = 6.666666;//³öÏÖÁËÕâ¸öÊı×Ö±íÊ¾Õâ¸öÎ»ÖÃÊÇ²Ù×÷·ûµÄÎ»ÖÃ
+stack<char> temp_stack;//½«ÖĞ×º±í´ïÊ½×ª»»Îªºó×º±í´ïÊ½ÓÃµÄÁÙÊ±Õ»
+stack<double> calcu;//¼ÆËãºó×º±í´ïÊ½Ê±´¢´æÊı×ÖµÄÕ»
+vector<double> number;//´¢´æºó×º±í´ïÊ½ÓÃµÄÏòÁ¿
+vector<char> operate;//´¢´æºó×º±í´ïÊ½ÖĞµÄ²Ù×÷·ûÓÃµÄÏòÁ¿
+map<char, int> m;//´¢´æ²Ù×÷·û¼°ÆäÓÅÏÈ¼¶µÄ¶ÔÓ¦¹ØÏµ
+map<string, double> table;//´¢´æ±äÁ¿¼°ÆäÖµ
+Token curr_tok = PRINT;//´¢´æµ±Ç°µÄ×ªÌ¬
+double number_value = 0;//´¢´æµ±Ç°¶ÁÈ¡µÄÖµ
+string string_value;//´¢´æµ±Ç°¶ÁÈ¡µÄ±äÁ¿Ãû
 
-Token input();//è¾“å…¥å‡½æ•°
-double express_value();//æ±‚è¡¨è¾¾å¼çš„å€¼çš„å‡½æ•°
-void to_stack(char ch, int prior1);//åˆ©ç”¨ä¸´æ—¶æ ˆå°†æ“ä½œç¬¦æ”¾åˆ°åç¼€è¡¨è¾¾å¼ä¸­
-void suffix();//å°†ä¸­ç¼€è¡¨è¾¾å¼è½¬æ¢æˆåç¼€è¡¨è¾¾å¼
-double caculate();//è®¡ç®—åç¼€è¡¨è¾¾å¼
+Token input();//ÊäÈëº¯Êı
+double express_value();//Çó±í´ïÊ½µÄÖµµÄº¯Êı
+void to_stack(char ch, int prior1);//ÀûÓÃÁÙÊ±Õ»½«²Ù×÷·û·Åµ½ºó×º±í´ïÊ½ÖĞ
+void suffix();//½«ÖĞ×º±í´ïÊ½×ª»»³Éºó×º±í´ïÊ½
+double caculate();//¼ÆËãºó×º±í´ïÊ½
 
-double dispatch() {//æ ¹æ®ç¬¬ä¸€æ¬¡è¾“å…¥çš„å€¼å†³å®šä¸‹ä¸€æ­¥æ“ä½œ
+double dispatch() {//¸ù¾İµÚÒ»´ÎÊäÈëµÄÖµ¾ö¶¨ÏÂÒ»²½²Ù×÷
     switch (curr_tok) {
         case NAME:
-            if (input() == ASSIGN) {//èµ‹å€¼è¡¨è¾¾å¼
+            if (input() == ASSIGN) {//¸³Öµ±í´ïÊ½
                 table[string_value] = express_value();
                 return table[string_value];
             } else {
                 cin.putback(curr_tok);
                 curr_tok = NAME;
-                return express_value();//è®¡ç®—è¡¨è¾¾å¼ï¼Œè¡¨è¾¾å¼ä¸­å«æœ‰å˜é‡
+                return express_value();//¼ÆËã±í´ïÊ½£¬±í´ïÊ½ÖĞº¬ÓĞ±äÁ¿
             }
         case LP:case NUMBER:case MINUS:case PLUS:
-            return express_value();//è®¡ç®—è¡¨è¾¾å¼
+            return express_value();//¼ÆËã±í´ïÊ½
         case PRINT:case END:case ERROR:
-            return 0;//è¾“å…¥ç»“æŸ
+            return 0;//ÊäÈë½áÊø
         case ASSIGN:case MUL:case DIV:
-        case RP://é”™è¯¯è¾“å…¥
+        case RP://´íÎóÊäÈë
             curr_tok = ERROR;
             return 0;
         default:
@@ -63,13 +63,13 @@ double dispatch() {//æ ¹æ®ç¬¬ä¸€æ¬¡è¾“å…¥çš„å€¼å†³å®šä¸‹ä¸€æ­¥æ“ä½œ
 }
 
 double express_value() {
-    suffix();//ä¸­ç¼€è¡¨è¾¾å¼è½¬åç¼€è¡¨è¾¾å¼
-    return caculate();//è®¡ç®—åç¼€è¡¨è¾¾å¼
+    suffix();//ÖĞ×º±í´ïÊ½×ªºó×º±í´ïÊ½
+    return caculate();//¼ÆËãºó×º±í´ïÊ½
 }
 
 void to_stack(char ch, int prior1) {
     char temp;
-    if (ch == ')') {//å°†temp_stackä¸­çš„æ“ä½œç¬¦æ”¾å…¥operateä¸­ï¼Œç›´åˆ°é‡åˆ°'('
+    if (ch == ')') {//½«temp_stackÖĞµÄ²Ù×÷·û·ÅÈëoperateÖĞ£¬Ö±µ½Óöµ½'('
         while (!temp_stack.empty()) {
             temp = temp_stack.top();
             if (temp == '(') {
@@ -85,11 +85,11 @@ void to_stack(char ch, int prior1) {
         return;
     }
     while (!temp_stack.empty()) {
-        if (ch == '(')//'('ç›´æ¥å‹å…¥æ ˆä¸­
+        if (ch == '(')//'('Ö±½ÓÑ¹ÈëÕ»ÖĞ
             break;
         temp = temp_stack.top();
         int prior2 = m[temp];
-        if (prior1 <= prior2) {//chçš„ä¼˜å…ˆçº§æ¯”æ ˆé¡¶çš„ä½ï¼Œè¿™å°†temp_stackçš„å…ƒç´ æ”¾å…¥operateä¸­ã€‚
+        if (prior1 <= prior2) {//chµÄÓÅÏÈ¼¶±ÈÕ»¶¥µÄµÍ£¬Õâ½«temp_stackµÄÔªËØ·ÅÈëoperateÖĞ¡£
             temp_stack.pop();
             operate.push_back(temp);
             number.push_back(flag);
@@ -97,16 +97,16 @@ void to_stack(char ch, int prior1) {
             break;
         }
     }
-    temp_stack.push(ch);//å°†chå‹å…¥æ ˆä¸­ã€‚
+    temp_stack.push(ch);//½«chÑ¹ÈëÕ»ÖĞ¡£
 }
 
-void suffix() {//å°†ä¸­ç¼€è¡¨è¾¾å¼è½¬æ¢æˆåç¼€è¡¨è¾¾å¼
+void suffix() {//½«ÖĞ×º±í´ïÊ½×ª»»³Éºó×º±í´ïÊ½
     if (curr_tok == PLUS)
         input();
     if (curr_tok == NUMBER)
-        number.push_back(number_value);//å°†æ•°å€¼æ”¾å…¥numberä¸­
+        number.push_back(number_value);//½«ÊıÖµ·ÅÈënumberÖĞ
     if (curr_tok == NAME)
-        number.push_back(table[string_value]);//å°†å˜é‡çš„å€¼æ”¾å…¥numberä¸­ã€‚
+        number.push_back(table[string_value]);//½«±äÁ¿µÄÖµ·ÅÈënumberÖĞ¡£
     if (curr_tok == MINUS) {
         input();
         if (curr_tok == NUMBER)
@@ -116,7 +116,7 @@ void suffix() {//å°†ä¸­ç¼€è¡¨è¾¾å¼è½¬æ¢æˆåç¼€è¡¨è¾¾å¼
             return;
         }
     }
-    while (true) {//å¦‚æœæ˜¯æ“ä½œç¬¦åˆ™è°ƒç”¨to_stack,å¦‚æœæ˜¯å˜é‡æˆ–æ•°å­—åˆ™æ”¾å…¥numberä¸­ã€‚
+    while (true) {//Èç¹ûÊÇ²Ù×÷·ûÔòµ÷ÓÃto_stack,Èç¹ûÊÇ±äÁ¿»òÊı×ÖÔò·ÅÈënumberÖĞ¡£
         input();
         switch (curr_tok) {
             case NUMBER:
@@ -150,13 +150,13 @@ void suffix() {//å°†ä¸­ç¼€è¡¨è¾¾å¼è½¬æ¢æˆåç¼€è¡¨è¾¾å¼
 }
 
 double caculate() {
-    while (!temp_stack.empty()) {//å°†temp_stackä¸­å‰©ä¸‹çš„å…ƒç´ ç›´æ¥æ”¾å…¥operateä¸­
+    while (!temp_stack.empty()) {//½«temp_stackÖĞÊ£ÏÂµÄÔªËØÖ±½Ó·ÅÈëoperateÖĞ
         operate.push_back(temp_stack.top());
-        number.push_back(flag);//ç”¨flagè¡¨ç¤ºnumberè¿™ä¸ªä½ç½®ä¸ºæ“ä½œç¬¦ï¼Œ
+        number.push_back(flag);//ÓÃflag±íÊ¾numberÕâ¸öÎ»ÖÃÎª²Ù×÷·û£¬
         temp_stack.pop();
     }
-    while (!number.empty()) {//å¦‚æœä»numberå–å‡ºæ˜¯flag,åˆ™å°†calcuæ ˆä¸­çš„ä¸¤ä¸ªå…ƒç´ å–å‡ºï¼Œ
-        // ç”¨operateä¸­çš„æ“ä½œç¬¦è¿›è¡Œæ“ä½œï¼Œç»“æœæ”¾å…¥calcuä¸­ï¼Œå¦‚æœæ˜¯æ•°å­—ï¼Œåˆ™ç›´æ¥æ”¾å…¥calcuä¸­ã€‚
+    while (!number.empty()) {//Èç¹û´ÓnumberÈ¡³öÊÇflag,Ôò½«calcuÕ»ÖĞµÄÁ½¸öÔªËØÈ¡³ö£¬
+        // ÓÃoperateÖĞµÄ²Ù×÷·û½øĞĞ²Ù×÷£¬½á¹û·ÅÈëcalcuÖĞ£¬Èç¹ûÊÇÊı×Ö£¬ÔòÖ±½Ó·ÅÈëcalcuÖĞ¡£
         double temp = number.front();
         number.erase(number.begin());
         if (temp != flag)
@@ -212,7 +212,7 @@ Token input() {
             cin >> number_value;
             return curr_tok = NUMBER;
         }
-        default: { //NAME(å­—æ¯å¼€å¤´çš„å­—æ¯æ•°å­—ä¸²)
+        default: { //NAME(×ÖÄ¸¿ªÍ·µÄ×ÖÄ¸Êı×Ö´®)
             if (isalpha(ch)) {
                 string_value = ch;
                 while (cin.get(ch) && isalnum(ch))
@@ -228,7 +228,7 @@ Token input() {
 int main() {
     table["pi"] = 3.1415926;
     table["e"] = 2.7172818;
-    m['('] = 0; m['+'] = 1; m['-'] = 1; m['*'] = 2; m['/'] = 2; m[')'] = -1;// ')'çš„ä¼˜å…ˆçº§æ— å®é™…æ„ä¹‰
+    m['('] = 0; m['+'] = 1; m['-'] = 1; m['*'] = 2; m['/'] = 2; m[')'] = -1;// ')'µÄÓÅÏÈ¼¶ÎŞÊµ¼ÊÒâÒå
     while (cin) {
         input();
         double result = dispatch();
@@ -236,7 +236,7 @@ int main() {
             cout << "input error" << endl;
         else
             cout << "output:  " << result << endl;
-        stack<char>().swap(temp_stack);//å°†ç›¸åº”çš„stackå’Œvectorç½®ç©º
+        stack<char>().swap(temp_stack);//½«ÏàÓ¦µÄstackºÍvectorÖÃ¿Õ
         stack<double>().swap(calcu);
         number.clear();
         operate.clear();

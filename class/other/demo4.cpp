@@ -35,7 +35,6 @@ CCar::CCar(int p,int r,int w):price(p),tyre(r,w){
 int main(){
     CCar c(1,2,3),c1(c);
     cout<<c1.getRadius()<<endl;
-    cout<<"Äã»¹"<<endl;
     system("pause");
     return 0;
 }
