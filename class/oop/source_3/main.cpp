@@ -1,3 +1,14 @@
+/*
+ * 文件描述：驱动器（主程序）
+ *		   
+ * 姓名:
+ *		   钟保明
+ * 学号:
+ *		   18070100017
+ * 日期:
+ *		   2020/04/11
+ *
+ */
 #include <iostream>
 #include <string>
 #include "lexer.cpp"

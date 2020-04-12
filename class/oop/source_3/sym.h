@@ -1,3 +1,14 @@
+/*
+ * 文件描述：符号表（symbol table）接口
+ *		   
+ * 姓名:
+ *		   钟保明
+ * 学号:
+ *		   18070100017
+ * 日期:
+ *		   2020/04/11
+ *
+ */
 #ifndef _Symbol_table_
 #define _Symbol_table_
 

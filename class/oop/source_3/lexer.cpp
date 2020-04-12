@@ -1,3 +1,14 @@
+/*
+ * 文件描述：实现词法分析器（Lexer）
+ *		   
+ * 姓名:
+ *		   钟保明
+ * 学号:
+ *		   18070100017
+ * 日期:
+ *		   2020/04/11
+ *
+ */
 #include <iostream>
 #include <fstream>
 #include "lexer.h" // 包含自己的接口声明头文件

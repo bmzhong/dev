@@ -1,3 +1,14 @@
+/*
+ * 文件描述：实现符号表（symbol table）
+ *		   
+ * 姓名:
+ *		   钟保明
+ * 学号:
+ *		   18070100017
+ * 日期:
+ *		   2020/04/11
+ *
+ */
 #include <map>
 #include <string>
 using namespace std;

@@ -1,3 +1,14 @@
+/*
+ * 文件描述：实现语法分析器 （parser）
+ *		   
+ * 姓名:
+ *		   钟保明
+ * 学号:
+ *		   18070100017
+ * 日期:
+ *		   2020/04/11
+ *
+ */
 #include <string>
 #include "lexer.h"
 #include "error.h"

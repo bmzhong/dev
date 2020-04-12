@@ -1,3 +1,14 @@
+/*
+ * 文件描述：实现错误处理器（error handler）
+ *		   
+ * 姓名:
+ *		   钟保明
+ * 学号:
+ *		   18070100017
+ * 日期:
+ *		   2020/04/11
+ *
+ */
 #include <string>
 #include <iostream>
 #include "lexer.h"
