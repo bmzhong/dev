@@ -15,7 +15,6 @@ int error_type = 0;
 
 double expr(bool get) //表达式分析开始以及处理'+'、'-'运算（符）
 {
-    error_type = 0;
     double left = term(get); //left表示'+'、'-'的左边结果
     for (;;)                 //无穷循环
         switch (curr_tok)
@@ -49,11 +48,7 @@ double term(bool get) //处理'*'、'/'运算（符）
                 break;
             }
             error_type = 1;
-            while (get_token())
-            {
-                if (curr_tok == PRINT || curr_tok == END)
-                    break;
-            }
+            skip();//丢弃表达式剩下的部分
             return 1;
             // return error(curr_tok, "divide by 0");
         default:
@@ -76,10 +71,14 @@ double prim(bool get) //表达式的基本项
         return v;
     }
     case NAME:
-    {                                    //命名常量或变量的名字
-        double &v = table[string_value]; //已定义的命名常量
-        if (get_token() == ASSIGN)       //名字后跟赋值运算符，是变量名
-            v = expr(true);              //获得变量的值(也是一个表达式)
+    { //命名常量或变量的名字
+        // double &v = table[string_value]; //已定义的命名常量
+        double v = Symbol_table::select(string_value); //已定义的命名常量
+        if (get_token() == ASSIGN)                     //名字后跟赋值运算符，是变量名
+        {
+            v = expr(true);//获得变量的值(也是一个表达式)
+            Symbol_table::add(string_value,v);
+        } 
         return v;
     }
     case MINUS:
@@ -92,11 +91,7 @@ double prim(bool get) //表达式的基本项
         if (curr_tok != RP)
         {
             error_type = 2;
-            while (get_token())
-            {
-                if (curr_tok == PRINT || curr_tok == END)
-                    break;
-            }
+            skip();//丢弃表达式剩下的部分
             return 1;
             // return error(curr_tok, ") expected");
         }
@@ -107,11 +102,7 @@ double prim(bool get) //表达式的基本项
     default:
         error_type = 3;
         // error(curr_tok, "primary expected");
-        while (get_token())
-        {
-            if (curr_tok == PRINT || curr_tok == END)
-                break;
-        }
+        skip();//丢弃表达式剩下的部分
         return 1;
     }
 }

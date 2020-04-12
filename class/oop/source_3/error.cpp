@@ -7,17 +7,17 @@ namespace Error
 {
 
 int no_of_errors = 0;
-
-double error(const int &rows, const string &s)
+//输出错误
+double error(const int &rows, const string &msg)
 {
-    no_of_errors++;
-    cerr << "error row:" << rows << "   " << s << "\n";
+    ++no_of_errors;
+    cerr << "error row:" << rows << "   " << msg << "\n";
     return 1;
 }
-
+//获取错误信息
 string error_msg(const int &error_type)
 {
-    string error_message=" ";
+    string error_message="bad expression";
     if (error_type == 1)
     {
         error_message = "divide by 0";

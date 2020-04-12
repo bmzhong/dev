@@ -7,20 +7,20 @@ namespace Lexer
 {
 // 下面是模块内的全局变量的 “定义”
 // 当前读到的单词的种类
-Token_value curr_tok=PRINT;
+Token_value curr_tok = PRINT;
 
-string string_value; 
+std::string string_value;
 
 double number_value;
 
 std::vector<std::string> fileNames;
 
 istream *input;
-
+char ch = 0;
 // 下面是模块内的函数的“定义”
 Token_value get_token()
 {
-    char ch = 0;
+    ch = 0;
     do
     { // 这里是跳过空白字符
         if (!(input->get(ch)))
@@ -36,7 +36,7 @@ Token_value get_token()
                 continue;
             }
         }
-    } while (ch != '\n'&& isspace(ch));
+    } while (ch != '\n' && isspace(ch));
 
     switch (ch)
     {
@@ -71,12 +71,13 @@ Token_value get_token()
     }
     default:
     { //NAME(字母开头的字母数字串),NAME=,or error  Page115
-        if (isalpha(ch)) {
-        	string_value = ch;
-        	while (input->get(ch) && isalnum(ch))
-        		string_value.push_back(ch);
-        	input->putback(ch);
-        	return curr_tok = NAME;
+        if (isalpha(ch))
+        {
+            string_value = ch;
+            while (input->get(ch) && isalnum(ch))
+                string_value.push_back(ch);
+            input->putback(ch);
+            return curr_tok = NAME;
         }
         return curr_tok = ERR;
     }
@@ -131,9 +132,9 @@ int switch_input()
 }
 void skip()
 {
-    // no_of_error++;
+    if(ch=='\n'||ch==';')//有可能已经读取整个错误表达式并且此时curr_tok值为ERR，
+         return;          //此时不应该再执行下面的语句，否则会把下一个表达式清空。
     while(*input){
-        char ch;
         input->get(ch);
         switch (ch)
         {
