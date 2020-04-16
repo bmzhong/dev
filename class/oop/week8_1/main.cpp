@@ -39,6 +39,8 @@ int main()
     {
         cerr << e2.what() << endl;
     }
+    cout<<"jifdasfd"
+    "fdasfdasf"<<endl;
     system("pause");
     return 0;
 }
