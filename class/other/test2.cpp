@@ -72,17 +72,17 @@ int main()
     // const char *s = "123";
     // pair<int, int> p = make_pair(1, 2);
     // cout << strlen(s) << endl;
-    try
-    {
-        f1();
-         cout<<"main"<<endl;
-    }
-    catch(const char *msg)
-    {
-        cout<<msg<<endl;
+    // try
+    // {
+    //     f1();
+    //      cout<<"main"<<endl;
+    // }
+    // catch(const char *msg)
+    // {
+    //     cout<<msg<<endl;
         
-    }
-   
+    // }
+    cout<<sizeof(int)<<endl;
     
     system("pause");
     return 0;
