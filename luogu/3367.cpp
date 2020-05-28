@@ -45,11 +45,27 @@ void init()
 
 void unite(int x, int y)
 {
-    int x_root=find_root(x);
-    int y_root=find_root(y);
+    int x_root = find_root(x);
+    int y_root = find_root(y);
     if (x_root != y_root)
         parent[x_root] = y_root;
 }
+
+// void unite(int x, int y)
+// {
+//     int x_root = find_root(x);
+//     int y_root = find_root(y);
+//     if (x_root == y_root)
+//         return;
+//     if (rank[x_root] < rank[y_root])
+//         parent[x_root] = y_root;
+//     else
+//     {
+//         parent[y_root] = x_root;
+//         if (rank[x_root] == rank[y_root])
+//             ++rank[x];
+//     }
+// }
 
 int find_root(int x)
 {
