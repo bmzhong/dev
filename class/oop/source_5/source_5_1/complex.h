@@ -9,6 +9,8 @@ private:
 public:
     complex(double _re = 0, double _im = 0) : re(_re), im(_im){};
 
+    complex operator = (const complex &);
+
     complex &operator+=(const complex &);
 
     complex &operator+=(const double &);
@@ -24,6 +26,10 @@ public:
     complex &operator/=(const complex &);
 
     complex &operator/=(const double &);
+    
+    friend complex operator+(complex &);
+
+    friend complex operator-(complex &);
 
     friend istream &operator>>(istream &, complex &);
 
