@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Vec4.cpp"
+#include "Vec4.h"
 using namespace std;
 
 void testPlus()
@@ -84,10 +84,10 @@ void testDivide()
 
 int main()
 {
-    // testPlus();
-    // testMinus();
-   // testMultiply();
-     testDivide();
+    testPlus();
+    testMinus();
+    testMultiply();
+    testDivide();
     system("pause");
     return 0;
 }
