@@ -95,11 +95,21 @@ void test1()
 
 void test2()
 {
-    complex a(1,3),b(2,-1);
-    cout<<"(22): " << +a <<endl;
-    cout<<"(23): " << +b <<endl;
-    cout<<"(24): " << -a<<endl;
-    cout<<"(25): " << -b<<endl;
+    complex a(1, 3), b(2, -1);
+    cout << "(22): " << +a << endl;
+    cout << "(23): " << +b << endl;
+    cout << "(24): " << -a << endl;
+    cout << "(25): " << -b << endl;
+}
+
+void test3()
+{
+    complex a(1, 2);
+    cout << "(26): " << polar(2, 0.5) << endl;
+    cout << "(27): " << conj(a) << endl;
+    cout << "(28): " << abs(a) << endl;
+    cout << "(29): " << arg(a) << endl;
+    cout << "(30): " << real(a) << " " << imag(a) << endl;
 }
 
 int main()
@@ -110,6 +120,7 @@ int main()
     testDivide();
     test1();
     test2();
+    test3();
     system("pause");
     return 0;
 }

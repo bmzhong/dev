@@ -1,4 +1,5 @@
 #include "complex.h"
+#include <cmath>
 
 complex complex::operator=(const complex &a)
 {
@@ -174,4 +175,42 @@ bool operator==(const complex &a, const complex &b)
 bool operator!=(const complex &a, const complex &b)
 {
     return !(a == b);
+}
+
+complex polar(const double &rho, const double &theta)
+{
+    complex r;
+    r.re = rho * cos(theta);
+    r.re = rho * sin(theta);
+    return r;
+}
+
+complex conj(const complex &a)
+{
+    complex r;
+    r.re = a.re;
+    r.im = -a.im;
+    return r;
+}
+
+double abs(const complex &a)
+{
+    double r = sqrt(a.re * a.re + a.im * a.im);
+    return r;
+}
+
+double arg(const complex &a)
+{
+    double r = atan(a.im / a.re);
+    return r;
+}
+
+double real(const complex &a)
+{
+    return a.re;
+}
+
+double imag(const complex &a)
+{
+    return a.im;
 }

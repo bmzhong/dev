@@ -30,8 +30,4 @@ public:
     Ptr_to_T &operator--();
 
     Ptr_to_T operator--(int);
-
-    T *begin();
-
-    T *end();
 };

@@ -64,4 +64,16 @@ public:
     friend bool operator==(const complex &, const complex &);
 
     friend bool operator!=(const complex &, const complex &);
+
+    friend complex polar(const double &,const double &);
+
+    friend complex conj(const complex &);
+
+    friend double abs(const complex &);
+
+    friend double arg(const complex &);
+
+    friend double real(const complex &);
+
+    friend double imag(const complex &);
 };
