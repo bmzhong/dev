@@ -1,48 +1,96 @@
 #include <iostream>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <cstdio>
 using namespace std;
-int f, n, m, w;
-int G[501][501];
+struct edge
+{
+    int to, cost;
+};
+int n, m, u, w, v, t, p;
+int d[501], cnt[501], use[501], sta[501];
+vector<edge> G[501];
 const int inf = 2147483647 / 2;
-int d[501];
+bool spfa(int s);
 int main()
 {
-    cin >> f;
-}
-void init()
-{
-    int s, e, t;
-    cin >> n >> m >> w;
-    for (int i = 1; i <= n; ++i)
+    scanf("%d", &t);
+    for (int k = 0; k < t; ++k)
     {
-        for (int j = 1; j <= n; ++j)
+        scanf("%d %d %d", &n, &m, &w);
+        for (int i = 1; i <= m; ++i)
         {
-            G[i][j] = inf;
-            if (i == j)
-                G[i][j] = 0;
+            scanf("%d %d %d", &u, &v, &p);
+            edge e;
+            e.to = v;
+            e.cost = p;
+            G[u].push_back(e);
+            e.to = u;
+            G[v].push_back(e);
+        }
+        for (int i = 1; i <= w; ++i)
+        {
+            scanf("%d %d %d", &u, &v, &p);
+            edge e;
+            e.to = v;
+            e.cost = -p;
+            G[u].push_back(e);
+            sta[i] = u;
+        }
+        int res = 1;
+        for (int i = 1; i <= w; ++i)
+        {
+            if (spfa(sta[i]))
+            {
+                cout << "YES" << endl;
+                res = 0;
+                break;
+            }
+        }
+        if (res)
+            cout << "NO" << endl;
+        for (int i = 1; i <= n; ++i)
+        {
+            G[i].clear();
         }
     }
-    for (int i = 1; i <= m; ++m)
-    {
-        cin >> s >> e >> t;
-        G[s][e] = t;
-        G[e][s] = t;
-    }
-    for (int i = 1; i <= w; ++i)
-    {
-        cin >> s >> e >> t;
-        G[s][e] = -t;
-    }
+    system("pause");
+    return 0;
 }
 
-bool find_negetive_circle()
+bool spfa(int s)
 {
-    fill(d + 1, d + 1 + n, 0);
-    d[]
-    for (int i = 1; i <= n; ++i)
+    fill(d + 1, d + n + 1, inf);
+    fill(cnt + 1, cnt + n + 1, 0);
+    fill(use + 1, use + n + 1, 0);
+    queue<int> que;
+    que.push(s);
+    use[s] = 1;
+    d[s] = 0;
+    cnt[s] = 1;
+    while (!que.empty())
     {
-        for (int j = 1; j <= n; ++j)
+        int u = que.front();
+        que.pop();
+        use[u] = 0;
+        int len = G[u].size();
+        for (int i = 0; i < len; ++i)
         {
-            if()
+            edge e = G[u][i];
+            if (d[e.to] > d[u] + e.cost)
+            {
+                d[e.to] = d[u] + e.cost;
+                cnt[e.to] = cnt[u] + 1;
+                if (cnt[e.to] > n)
+                    return true;
+                if (!use[e.to])
+                {
+                    que.push(e.to);
+                    use[e.to] = 1;
+                }
+            }
         }
     }
+    return false;
 }

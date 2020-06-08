@@ -8,7 +8,7 @@ struct edge
 {
     int to, cost;
 };
-int n, m, u, w, v,t, p;
+int n, m, u, w, v, t, p;
 int d[501], cnt[501], use[501], sta[501];
 vector<edge> G[501];
 const int inf = 2147483647 / 2;
@@ -41,7 +41,7 @@ int main()
         int res = 1;
         for (int i = 1; i <= w; ++i)
         {
-            if (spfa(i))
+            if (spfa(sta[i]))
             {
                 cout << "YES" << endl;
                 res = 0;
