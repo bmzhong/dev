@@ -63,7 +63,7 @@ void unite(int x, int y)
 //     {
 //         parent[y_root] = x_root;
 //         if (rank[x_root] == rank[y_root])
-//             ++rank[x];
+//             ++rank[x_root];
 //     }
 // }
 
