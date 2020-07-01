@@ -31,7 +31,7 @@ void prim(int s)
 {
     fill(d + 1, d + n + 1, inf);
     d[s] = 0;
-    priority_queue<P, vector<P>, greater<P>> pq;
+    priority_queue<P, vector<P>, greater<P> > pq;
     pq.push(P(0, s));
     while (!pq.empty())
     {
