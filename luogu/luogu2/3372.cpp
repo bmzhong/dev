@@ -1,60 +1,63 @@
 #include <iostream>
 #include <cstdio>
+#include <algorithm>
 using namespace std;
-long long a[200000];
-int n, m;
-void update(int k, long long value);
-long long query(int x, int y, int k, int l, int r);
+int t, x, y, k, m, n = 1, _n;
+long long data1[1000002], datb[1000002];
+void add(int a, int b, int x, int k, int l, int r);
+long long sum(int a, int b, int k, int l, int r);
 int main()
 {
-    scanf("%d%d", &n, &m);
-    long long t;
-    for (int i = 1; i <= n; ++i)
+    scanf("%d%d", &_n, &m);
+    while (n < _n)
+        n = n << 1;
+    for (int i = 0; i < _n; ++i)
     {
-        scanf("%lld", &t);
-        update(n + i, t);
+        scanf("%d", &t);
+        add(i, i + 1, t, 0, 0, n);
     }
-    for(int i=1;i<=2*n;++i){
-        cout<<a[i]<<endl;
-    }
-    int x, y, s;
-    long long k;
-    for (int i = 1; i <= m; ++i)
+    for (int i = 0; i < m; ++i)
     {
-        scanf("%d", &s);
-        if (s == 1)
+        char ch;
+        scanf(" %c", &ch);
+        if (ch == 'C')
         {
-            scanf("%d%d%lld", &x, &y, &k);
-            for (int j = x; j <= y; ++j)
-            {
-                update(j + n, k);
-            }
+            scanf("%d%d%d", &x, &y, &k);
+            add(x-1, y, k, 0, 0, n);
         }
-        else if (s == 2)
+        else
         {
             scanf("%d%d", &x, &y);
-            printf("%lld\n", query(x, y, 1, 1, n));
+            printf("%lld\n", sum(x-1, y, 0, 0, n));
         }
     }
     system("pause");
     return 0;
 }
 
-void update(int k, long long value)
+void add(int a, int b, int x, int k, int l, int r)
 {
-    a[k] += value;
-    while (k > 1)
+    if (a <= l && r <= b)
+        data1[k] += x;
+    else if (l < b && a < r)
     {
-        k = k / 2;
-        a[k] = a[2 * k] + a[2 * k + 1];
+        datb[k] += (min(b, r) - max(a, l)) * x;
+        add(a, b, x, 2 * k + 1, l, (l + r) / 2);
+        add(a, b, x, 2 * k + 2, (l + r) / 2, r);
     }
 }
-long long query(int x, int y, int k, int l, int r)
+
+long long sum(int a, int b, int k, int l, int r)
 {
-    if (l > r || y < l || r < x)
+    if (b <= l || r <= a)
         return 0;
-    else if (x <= l && r <= y)
-        return a[k];
+    else if (a <= l && r <= b)
+        return data1[k] * (r - l) + datb[k];
     else
-        return query(x, y, 2 * k, l, (l + r) / 2) + query(x, y, 2 * k + 1, (l + r) / 2 + 1, r);
+    {
+        long long res = (min(r, b) - max(l, a)) * data1[k];
+        res += sum(a, b, 2 * k + 1, l, (l + r) / 2);
+        res += sum(a, b, 2 * k + 2, (l + r) / 2, r);
+        return res;
+    }
 }
