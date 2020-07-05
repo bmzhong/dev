@@ -21,12 +21,12 @@ int main()
     }
     for (int i = 1; i <= n; ++i)
     {
-        if (!c[i])
+        if (!c[i] && bc[i])
         {
             st.push_back(i);
             d[i] = 1;
         }
-        if (!bc[i])
+        if (!bc[i] && c[i])
             ed.push_back(i);
     }
     int len = st.size();
@@ -39,29 +39,21 @@ int main()
     {
         res = (res + d[ed[i]]) % mod;
     }
-    printf("%d\n",res);
+    printf("%d\n", res);
     system("pause");
     return 0;
 }
 
-void bfs(int s)
+void solve(int s)
 {
-    memset(use + 1, n * sizeof(int), 0);
-    queue<int> pq;
-    pq.push(s);
-    while (!pq.empty())
+    memset(use, 0, sizeof(use));
+    use[s] = 1;
+    while (true)
     {
-        int u = pq.front();
-        pq.pop();
-        use[u] = 1;
-        int len = G[u].size();
-        for (int i = 0; i < len; ++i)
+        int v = -1;
+        for (int i = 1; i <= n; ++i)
         {
-            int v = G[u][i];
-            if (use[v])
-                continue;
-            pq.push(v);
-            d[v] = (d[v] + d[u]) % mod;
+            if(!use[i]&&G[])
         }
     }
 }
