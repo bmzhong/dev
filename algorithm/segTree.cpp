@@ -2,8 +2,11 @@
 #include <cstdio>
 using namespace std;
 typedef long long ll;
-ll tag[200001], ans[200001], a[100001];
-ll m, n;
+ll tag[4000001], ans[4000001], a[4000001];
+ll m, n, x, y, t, k;
+void build(ll p, ll l, ll r);
+ll query(ll nl, ll nr, ll l, ll r, ll p);
+void update(ll nl, ll nr, ll l, ll r, ll p, ll k);
 int main()
 {
     scanf("%lld%lld", &n, &m);
@@ -11,6 +14,22 @@ int main()
     {
         scanf("%lld", &a[i]);
     }
+    build(1, 1, n);
+    for (int i = 1; i <= m; ++i)
+    {
+        scanf("%lld%lld%lld", &t, &x, &y);
+        if (t == 1)
+        {
+            scanf("%lld", &k);
+            update(x, y, 1, n, 1, k);
+        }
+        if (t == 2)
+        {
+            printf("%lld\n", query(x, y, 1, n, 1));
+        }
+    }
+    system("pause");
+    return 0;
 }
 
 void pushup(int p)
@@ -20,6 +39,7 @@ void pushup(int p)
 
 void build(ll p, ll l, ll r)
 {
+    tag[p] = 0;
     if (l == r)
     {
         ans[p] = a[l];
@@ -60,8 +80,14 @@ void update(ll nl, ll nr, ll l, ll r, ll p, ll k)
 }
 ll query(ll nl, ll nr, ll l, ll r, ll p)
 {
-    if (l == r)
+    if (nl <= l && nr >= r)
         return ans[p];
     ll res = 0;
     ll mid = (l + r) >> 1;
+    pushdown(p, l, r);
+    if (nl <= mid)
+        res += query(nl, nr, l, mid, p << 1);
+    if (nr > mid)
+        res += query(nl, nr, mid + 1, r, p << 1 | 1);
+    return res;
 }
