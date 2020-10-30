@@ -88,6 +88,7 @@
         "xlocnum": "cpp",
         "xloctime": "cpp",
         "xstddef": "cpp",
-        "xtr1common": "cpp"
+        "xtr1common": "cpp",
+        "bit": "cpp"
     }
 }
