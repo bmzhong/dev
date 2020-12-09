@@ -1,3 +1,5 @@
+#ifndef _THIS_IS_LEXER_CPP
+#define _THIS_IS_LEXER_CPP
 #include "lexer.hpp"
 #include "dfa.cpp"
 #include "../error/error.cpp"
@@ -216,3 +218,4 @@ Token getToken()
 	//	currToken.where=where;
 	return currToken;
 }
+#endif

@@ -1,3 +1,5 @@
+#ifndef _THIS_IS_ERROR_CPP
+#define _THIS_IS_ERROR_CPP
 #include "error.hpp"
 using namespace std;
 ofstream out;
@@ -34,3 +36,9 @@ void parserError2(char lexeme[], int row, int col)
 {
     out << "parser error: unmatched token: " << lexeme << " (row " << row << " col " << col << ")\n";
 }
+
+void parserError3(const char *msg)
+{
+    out << msg;
+}
+#endif

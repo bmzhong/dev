@@ -1,3 +1,5 @@
+#ifndef _THIS_IS_DFA_CPP
+#define _THIS_IS_DFA_CPP
 #include "lexer.hpp"
 #include <map>
 using namespace std;
@@ -114,3 +116,4 @@ int move(const int &fromState,char character){
     }
     return  moveTable[From(fromState,character)].state;
 }
+#endif

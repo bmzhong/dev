@@ -10,4 +10,6 @@ void lexerError(char errorChar,int row,int col);
 void parserError1(int row,int col);
 
 void parserError2(char lexeme[],int row,int col);
+
+void parserError3(const char *);
 #endif
