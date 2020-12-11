@@ -11,4 +11,8 @@ struct ExprNode
     double constNumber=0.0;
     double * constParamPtr=NULL;
 };
+
+double *getTAddress();
+
+void parser(string filename);
 #endif

@@ -1,6 +1,13 @@
+#ifndef _THIS_IS_PARSER_CPP
+#define _THIS_IS_PARSER_CPP
+
 #include "../lexer/lexer.cpp"
 #include "parser.hpp"
 #include "../error/error.cpp"
+#include <cstdio>
+#include "../semantics/semantics.cpp"
+
+#define _SEMANTICS_
 
 void program();
 
@@ -40,6 +47,11 @@ void matchToken(Token_Type theTokenType);
 
 void fetchToken();
 
+void deleteTree(ExprNode *root);
+
+void printByPreOrder(ExprNode *root, int nodeIndent);
+
+
 Token currToken;
 double parameter;
 
@@ -59,6 +71,10 @@ void initParser(string filename) {
     parserOut.open("E:\\clionData\\learnCpp\\interpreter\\parser\\parserLog.txt");
     parameter = 0.0;
     indent = 0;
+}
+
+double *getTAddress() {
+    return &parameter;
 }
 
 void closeParser() {
@@ -93,18 +109,21 @@ ExprNode *makeFuncNode(Token_Type theTokenType, FuncPtr funcPtr, ExprNode *child
     ExprNode *parent = new ExprNode();
     parent->child = child;
     parent->funcPtr = funcPtr;
+    parent->tokenType = theTokenType;
     return parent;
 }
 
 ExprNode *makeConstNumberNode(Token_Type theTokenType, double value) {
     ExprNode *leafNode = new ExprNode();
     leafNode->constNumber = value;
+    leafNode->tokenType = theTokenType;
     return leafNode;
 }
 
 ExprNode *makeConstParamNode(Token_Type theTokenType, double *valuePtr) {
     ExprNode *leafNode = new ExprNode();
     leafNode->constParamPtr = valuePtr;
+    leafNode->tokenType = theTokenType;
     return leafNode;
 }
 
@@ -139,59 +158,95 @@ void statement() {
 }
 
 void originStatement() {
+    ExprNode *originXPtr, *originYPtr;
     enter("originStatement");
     matchToken(ORIGIN);
     matchToken(IS);
     matchToken(L_BRACKET);
-    expression();
+    originXPtr = expression();
+    printByPreOrder(originXPtr, 0);
     matchToken(COMMA);
-    expression();
+    originYPtr = expression();
+    printByPreOrder(originYPtr, 0);
     matchToken(R_BRACKET);
     back("originStatement");
+#ifdef _SEMANTICS_
+    setOrigin(originXPtr, originYPtr);
+#endif
+    deleteTree(originXPtr);
+    deleteTree(originYPtr);
 }
 
 void scaleStatement() {
+    ExprNode *scaleXPtr, *scaleYPtr;
     enter("scaleStatement");
     matchToken(SCALE);
     matchToken(IS);
     matchToken(L_BRACKET);
-    expression();
+    scaleXPtr = expression();
+    printByPreOrder(scaleXPtr, 0);
     matchToken(COMMA);
-    expression();
+    scaleYPtr = expression();
+    printByPreOrder(scaleYPtr, 0);
     matchToken(R_BRACKET);
     back("scaleStatement");
+#ifdef _SEMANTICS_
+    setScale(scaleXPtr, scaleYPtr);
+#endif
+    deleteTree(scaleXPtr);
+    deleteTree(scaleYPtr);
 }
 
 void rotStatement() {
+    ExprNode *anglePtr;
     enter("rotStatement");
     matchToken(ROT);
     matchToken(IS);
-    expression();
+    anglePtr = expression();
+    printByPreOrder(anglePtr, 0);
     back("rotStatement");
+#ifdef _SEMANTICS_
+    setRotate(anglePtr);
+#endif
+    deleteTree(anglePtr);
 }
 
 void forStatement() {
+    ExprNode *start, *end, *step, *dotX, *dotY;
     enter("forStatement");
     matchToken(FOR);
     matchToken(T);
     matchToken(FROM);
-    expression();
+    start = expression();
+    printByPreOrder(start, 0);
     matchToken(TO);
-    expression();
+    end = expression();
+    printByPreOrder(end, 0);
     matchToken(STEP);
-    expression();
+    step = expression();
+    printByPreOrder(step, 0);
     matchToken(DRAW);
     matchToken(L_BRACKET);
-    expression();
+    dotX = expression();
+    printByPreOrder(dotX, 0);
     matchToken(COMMA);
-    expression();
+    dotY = expression();
+    printByPreOrder(dotY, 0);
     matchToken(R_BRACKET);
     back("forStatement");
+#ifdef _SEMANTICS_
+    drawLoop(start, end, step, dotX, dotY);
+#endif
+    deleteTree(start);
+    deleteTree(end);
+    deleteTree(step);
+    deleteTree(dotX);
+    deleteTree(dotY);
 }
 
 ExprNode *expression() {
     enter("expression");
-    ExprNode *left, *right, *thisNode;
+    ExprNode *left, *right;
     Token_Type tempTokeType;
     left = term();
     while (currToken.type == PLUS || currToken.type == MINUS) {
@@ -201,11 +256,11 @@ ExprNode *expression() {
         left = makeBinaryNode(tempTokeType, left, right);
     }
     back("expression");
-    return thisNode = left;
+    return  left;
 }
 
 ExprNode *term() {
-    ExprNode *thisNode, *left, *right;
+    ExprNode *left, *right;
     Token_Type tempTokenType;
     left = factor();
     while (currToken.type == MUL || currToken.type == DIV) {
@@ -214,7 +269,7 @@ ExprNode *term() {
         right = factor();
         left = makeBinaryNode(tempTokenType, left, right);
     }
-    return thisNode = left;
+    return  left;
 }
 
 ExprNode *factor() {
@@ -236,14 +291,14 @@ ExprNode *factor() {
 }
 
 ExprNode *component() {
-    ExprNode *thisNode, *left, *right;
+    ExprNode *left, *right;
     left = atom();
     if (currToken.type == POWER) {
         matchToken(POWER);
         right = component();
-        thisNode = makeBinaryNode(POWER, left, right);
+        left = makeBinaryNode(POWER, left, right);
     }
-    return thisNode;
+    return left;
 }
 
 ExprNode *atom() {
@@ -252,7 +307,7 @@ ExprNode *atom() {
     switch (currToken.type) {
         case CONST_ID:
             matchToken(CONST_ID);
-            thisNode = makeConstNumberNode(CONST_ID, currToken.value);
+            thisNode = makeConstNumberNode(CONST_ID, tempToken.value);
             break;
         case T:
             matchToken(T);
@@ -264,6 +319,12 @@ ExprNode *atom() {
             childNode = expression();
             matchToken(R_BRACKET);
             thisNode = makeFuncNode(FUNC, tempToken.funcptr, childNode);
+            break;
+        case L_BRACKET:
+            matchToken(L_BRACKET);
+            thisNode=expression();
+            matchToken(R_BRACKET);
+            break;
         default:
             parserError2(currToken.lexeme, currToken.where.row, currToken.where.col);
     }
@@ -295,3 +356,74 @@ void parserPrint(const char *msg) {
 void parserPrint(string msg) {
     parserOut << msg;
 }
+
+void printByPreOrder(ExprNode *root, int nodeIndent) {
+    char ch[40] = {"\0"};
+    int len = 0;
+    if (NULL == root)
+        return;
+    for (int i = 0; i < nodeIndent + indent; ++i) {
+        parserPrint(" ");
+    }
+    switch (root->tokenType) {
+        case PLUS:
+            parserPrint("+\n");
+            break;
+        case MINUS:
+            parserPrint("-\n");
+            break;
+        case MUL:
+            parserPrint("*\n");
+            break;
+        case DIV:
+            parserPrint("/\n");
+            break;
+        case POWER:
+            parserPrint("**\n");
+            break;
+        case T:
+            parserPrint("T\n");
+            return;
+        case FUNC:
+            sprintf(ch, "%p", root->funcPtr);
+            len = strlen(ch);
+            ch[len] = '\n';
+            ch[len + 1] = '\0';
+            parserPrint(ch);
+            printByPreOrder(root->child, nodeIndent + 2);
+            return;
+        case CONST_ID:
+            sprintf(ch, "%.2f", root->constNumber);
+            len = strlen(ch);
+            ch[len] = '\n';
+            ch[len + 1] = '\0';
+            parserPrint(ch);
+            break;
+        default:
+            parserPrint("errorNode");
+            return;
+    }
+    printByPreOrder(root->left, nodeIndent + 2);
+    printByPreOrder(root->right, nodeIndent + 2);
+}
+
+void deleteTree(ExprNode *root) {
+    if (NULL == root)
+        return;
+    switch (root->tokenType) {
+        case PLUS:
+        case MINUS:
+        case DIV:
+        case MUL:
+        case POWER:
+            deleteTree(root->left);
+            deleteTree(root->right);
+            break;
+        case FUNC:
+            deleteTree(root->child);
+            break;
+    }
+    delete root;
+}
+
+#endif

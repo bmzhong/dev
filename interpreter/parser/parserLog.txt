@@ -1,95 +1,315 @@
 enter in program
-enter in statement
-enter in originStatement
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-exit from originStatement
-exit from statement
-enter in program
-enter in statement
-exit from statement
-enter in program
-enter in statement
-exit from statement
-enter in program
-enter in statement
-exit from statement
-enter in program
-enter in statement
-exit from statement
-enter in program
-enter in statement
-enter in rotStatement
-enter in expression
-exit from expression
-exit from rotStatement
-exit from statement
-enter in program
-enter in statement
-enter in scaleStatement
-enter in expression
-enter in expression
-exit from expression
-exit from expression
-enter in expression
-exit from expression
-exit from scaleStatement
-exit from statement
-enter in program
-enter in statement
-enter in forStatement
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-exit from forStatement
-exit from statement
-enter in program
-enter in statement
-enter in forStatement
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-exit from forStatement
-exit from statement
-enter in program
-enter in statement
-enter in forStatement
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-enter in expression
-exit from expression
-exit from forStatement
-exit from statement
-enter in program
-exit from program
-exit from program
-exit from program
-exit from program
-exit from program
-exit from program
-exit from program
-exit from program
-exit from program
+  enter in statement
+    enter in originStatement
+      enter in expression
+      exit from expression
+      250.00
+      enter in expression
+      exit from expression
+      300.00
+    exit from originStatement
+  exit from statement
+  enter in statement
+    enter in scaleStatement
+      enter in expression
+      exit from expression
+      160.00
+      enter in expression
+      exit from expression
+      /
+        160.00
+        3.00
+    exit from scaleStatement
+  exit from statement
+  enter in statement
+    enter in rotStatement
+      enter in expression
+      exit from expression
+      +
+        /
+          3.14
+          2.00
+        /
+          *
+            0.00
+            3.14
+          3.00
+    exit from rotStatement
+  exit from statement
+  enter in statement
+    enter in forStatement
+      enter in expression
+      exit from expression
+      -
+        0.00
+        3.14
+      enter in expression
+      exit from expression
+      3.14
+      enter in expression
+      exit from expression
+      /
+        3.14
+        500.00
+      enter in expression
+        enter in expression
+        exit from expression
+      exit from expression
+      00406E4C
+        T
+      enter in expression
+        enter in expression
+        exit from expression
+      exit from expression
+      00406DE4
+        T
+    exit from forStatement
+  exit from statement
+  enter in statement
+    enter in rotStatement
+      enter in expression
+      exit from expression
+      +
+        /
+          3.14
+          2.00
+        /
+          *
+            2.00
+            3.14
+          3.00
+    exit from rotStatement
+  exit from statement
+  enter in statement
+    enter in forStatement
+      enter in expression
+      exit from expression
+      -
+        0.00
+        3.14
+      enter in expression
+      exit from expression
+      3.14
+      enter in expression
+      exit from expression
+      /
+        3.14
+        500.00
+      enter in expression
+        enter in expression
+        exit from expression
+      exit from expression
+      00406E4C
+        T
+      enter in expression
+        enter in expression
+        exit from expression
+      exit from expression
+      00406DE4
+        T
+    exit from forStatement
+  exit from statement
+  enter in statement
+    enter in rotStatement
+      enter in expression
+      exit from expression
+      -
+        /
+          3.14
+          2.00
+        /
+          *
+            2.00
+            3.14
+          3.00
+    exit from rotStatement
+  exit from statement
+  enter in statement
+    enter in forStatement
+      enter in expression
+      exit from expression
+      -
+        0.00
+        3.14
+      enter in expression
+      exit from expression
+      3.14
+      enter in expression
+      exit from expression
+      /
+        3.14
+        500.00
+      enter in expression
+        enter in expression
+        exit from expression
+      exit from expression
+      00406E4C
+        T
+      enter in expression
+        enter in expression
+        exit from expression
+      exit from expression
+      00406DE4
+        T
+    exit from forStatement
+  exit from statement
+  enter in statement
+    enter in originStatement
+      enter in expression
+      exit from expression
+      700.00
+      enter in expression
+      exit from expression
+      300.00
+    exit from originStatement
+  exit from statement
+  enter in statement
+    enter in scaleStatement
+      enter in expression
+      exit from expression
+      160.00
+      enter in expression
+      exit from expression
+      160.00
+    exit from scaleStatement
+  exit from statement
+  enter in statement
+    enter in rotStatement
+      enter in expression
+      exit from expression
+      0.00
+    exit from rotStatement
+  exit from statement
+  enter in statement
+    enter in forStatement
+      enter in expression
+      exit from expression
+      0.00
+      enter in expression
+      exit from expression
+      *
+        2.00
+        3.14
+      enter in expression
+      exit from expression
+      /
+        3.14
+        500.00
+      enter in expression
+        enter in expression
+        exit from expression
+      exit from expression
+      00406E4C
+        T
+      enter in expression
+        enter in expression
+        exit from expression
+      exit from expression
+      00406DE4
+        T
+    exit from forStatement
+  exit from statement
+  enter in statement
+    enter in forStatement
+      enter in expression
+      exit from expression
+      0.00
+      enter in expression
+      exit from expression
+      *
+        20.00
+        3.14
+      enter in expression
+      exit from expression
+      /
+        3.14
+        500.00
+      enter in expression
+        enter in expression
+          enter in expression
+          exit from expression
+        exit from expression
+        enter in expression
+        exit from expression
+        enter in expression
+        exit from expression
+        enter in expression
+          enter in expression
+            enter in expression
+            exit from expression
+          exit from expression
+        exit from expression
+      exit from expression
+      +
+        *
+          -
+            1.00
+            /
+              1.00
+              /
+                10.00
+                7.00
+          00406E4C
+            T
+        *
+          /
+            1.00
+            /
+              10.00
+              7.00
+          00406E4C
+            *
+              -
+                0.00
+                T
+              -
+                /
+                  10.00
+                  7.00
+                1.00
+      enter in expression
+        enter in expression
+          enter in expression
+          exit from expression
+        exit from expression
+        enter in expression
+        exit from expression
+        enter in expression
+        exit from expression
+        enter in expression
+          enter in expression
+            enter in expression
+            exit from expression
+          exit from expression
+        exit from expression
+      exit from expression
+      +
+        *
+          -
+            1.00
+            /
+              1.00
+              /
+                10.00
+                7.00
+          00406DE4
+            T
+        *
+          /
+            1.00
+            /
+              10.00
+              7.00
+          00406DE4
+            *
+              -
+                0.00
+                T
+              -
+                /
+                  10.00
+                  7.00
+                1.00
+    exit from forStatement
+  exit from statement
 exit from program

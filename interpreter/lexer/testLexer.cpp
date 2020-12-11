@@ -4,7 +4,7 @@
 using namespace std;
 int main()
 {
-    string filename="E:\\clionData\\learnCpp\\interpreter\\lexer\\draw1.txt";
+    string filename="E:\\clionData\\learnCpp\\interpreter\\lexer\\draw2.txt";
     if (!initLexer(filename))
     {
         cout << "error" << endl;
@@ -19,6 +19,5 @@ int main()
             break;
     }
     closeLexer();
-    system("pause");
     return 0;
 }

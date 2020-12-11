@@ -5,7 +5,7 @@ using namespace std;
 ofstream out;
 bool initError()
 {
-    out.open("E:\\dev\\interpreter\\error\\errorLog.txt");
+    out.open("E:\\clionData\\learnCpp\\interpreter\\error\\errorLog.txt");
     if (!out.is_open())
         return false;
     return true;
