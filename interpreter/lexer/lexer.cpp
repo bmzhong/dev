@@ -104,7 +104,7 @@ int appendTokenLexeme(Token *token, char nextChar)
 int preProcess(Token *currToken)
 {
 	currToken->type = ERRTOKEN;
-	currToken->lexeme[0] = '\0';
+	currToken->lexeme[0] = '\0';  // debug1
 	currToken->value = 0.0;
 	currToken->funcptr = NULL;
 	currToken->where = {0, 0};
@@ -162,14 +162,14 @@ bool postProcess(Token *currToken, int lastState)
 			currToken->type = ERRTOKEN;
 		else
 		{
-			//                    *currToken = theToken;
+			//                    *currToken = theToken;  //debug2
 			currToken->type = theToken.type;
 			currToken->value = theToken.value;
 			currToken->funcptr = theToken.funcptr;
 			int len = strlen(theToken.lexeme);
 			for (int i = 0; i < len; ++i)
 			{
-				currToken->lexeme[i] = theToken.lexeme[i];
+				currToken->lexeme[i] = theToken.lexeme[i];  //debug3
 			}
 			currToken->lexeme[len] = '\0';
 		}

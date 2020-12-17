@@ -1,2 +1,0 @@
-lexer error: illegal character ? (row 2 col 9)
-lexer error: illegal character ? (row 2 col 10)

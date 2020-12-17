@@ -4,7 +4,7 @@
 using namespace std;
 int main()
 {
-    string filename="E:\\clionData\\learnCpp\\interpreter\\lexer\\draw2.txt";
+    string filename="../testFile/draw2.txt";
     if (!initLexer(filename))
     {
         cout << "error" << endl;

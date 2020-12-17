@@ -1,51 +1,52 @@
 #ifndef _THIS_IS_DFA_CPP
 #define _THIS_IS_DFA_CPP
-#include "lexer.hpp"
+
 #include <map>
+
 using namespace std;
-struct From
-{
+
+struct From {
     int state;
     char character;
+
     From() {
-	}
-    From(int _state, char _character)
-    {
+    }
+
+    From(int _state, char _character) {
         state = _state;
         character = _character;
     }
-    bool operator<(const From &from) const
-    {
-        if (state == from.state)
-        {
+
+    bool operator<(const From &from) const {
+        if (state == from.state) {
             return character < from.character;
         }
         return state < from.state;
     }
 };
-struct NextState
-{
+
+struct NextState {
     int state = -1;
-    NextState(int _state = -1)
-    {
+
+    NextState(int _state = -1) {
         state = _state;
     }
 };
 
-struct StateType{
-    Token_Type token=ERRTOKEN;
-    StateType(Token_Type _token=ERRTOKEN){
-        token=_token;
+struct StateType {
+    Token_Type token = ERRTOKEN;
+
+    StateType(Token_Type _token = ERRTOKEN) {
+        token = _token;
     }
 };
 
 map<From, NextState> moveTable;
 
 typedef int finalState;
-map<finalState,StateType> finalStateTable;
+map<finalState, StateType> finalStateTable;
 
-void initMoveTable()
-{
+void initMoveTable() {
     moveTable[From(0, 'a')] = NextState(1);
     moveTable[From(0, '0')] = NextState(2);
     moveTable[From(0, '*')] = NextState(4);
@@ -67,53 +68,54 @@ void initMoveTable()
 }
 
 
-void initFinalStateTable(){
-    finalStateTable[1]=StateType(ID);
-    finalStateTable[2]=StateType(CONST_ID);
-    finalStateTable[3]=StateType(CONST_ID);
+void initFinalStateTable() {
+    finalStateTable[1] = StateType(ID);
+    finalStateTable[2] = StateType(CONST_ID);
+    finalStateTable[3] = StateType(CONST_ID);
 
-    finalStateTable[4]=StateType(MUL);
-    finalStateTable[5]=StateType(POWER);
-    finalStateTable[6]=StateType(DIV);
-    finalStateTable[7]=StateType(MINUS);
-    finalStateTable[8]=StateType(PLUS);
-    finalStateTable[9]=StateType(COMMA);
-    finalStateTable[10]=StateType(SEMICO);
-    finalStateTable[11]=StateType(L_BRACKET);
-    finalStateTable[12]=StateType(R_BRACKET);
-    finalStateTable[13]=StateType(COMMENT);
+    finalStateTable[4] = StateType(MUL);
+    finalStateTable[5] = StateType(POWER);
+    finalStateTable[6] = StateType(DIV);
+    finalStateTable[7] = StateType(MINUS);
+    finalStateTable[8] = StateType(PLUS);
+    finalStateTable[9] = StateType(COMMA);
+    finalStateTable[10] = StateType(SEMICO);
+    finalStateTable[11] = StateType(L_BRACKET);
+    finalStateTable[12] = StateType(R_BRACKET);
+    finalStateTable[13] = StateType(COMMENT);
 }
 
-struct DFA{
+struct DFA {
     int start_state;
     map<From, NextState> *moveTable;
-    map<finalState,StateType> *finalStateTable;
+    map<finalState, StateType> *finalStateTable;
 };
 
-DFA dfa={0,&moveTable,&finalStateTable};
+DFA dfa = {0, &moveTable, &finalStateTable};
 
-void initDfa(){
+void initDfa() {  //debug2
     initFinalStateTable();
     initMoveTable();
 }
 
 
-int getStartState(){
+int getStartState() {
     return dfa.start_state;
-} 
+}
 
-Token_Type stateIsFinal(const int &state){
+Token_Type stateIsFinal(const int &state) {
     return finalStateTable[state].token;
 }
 
-int move(const int &fromState,char character){
-    if(character>='0'&&character<='9'){
-        character='0';
-    }else if(character>='a'&&character<='z'){
-        character='a';
-    }else if(character>='A'&&character<='Z'){
-        character='a';
+int move(const int &fromState, char character) {
+    if (character >= '0' && character <= '9') {
+        character = '0';
+    } else if (character >= 'a' && character <= 'z') {
+        character = 'a';
+    } else if (character >= 'A' && character <= 'Z') {
+        character = 'a';
     }
-    return  moveTable[From(fromState,character)].state;
+    return moveTable[From(fromState, character)].state;
 }
+
 #endif

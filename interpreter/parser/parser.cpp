@@ -7,8 +7,8 @@
 #include <cstdio>
 #include "../semantics/semantics.cpp"
 
-#define _SEMANTICS_
 
+//递归下降子程序
 void program();
 
 void statement();
@@ -35,19 +35,29 @@ void initParser(string filename);
 
 void closeParser();
 
-void parserPrint(string msg);
-
-void parserPrint(const char *msg);
-
-void back(string msg);
-
-void enter(string msg);
-
 void matchToken(Token_Type theTokenType);
 
 void fetchToken();
 
 void deleteTree(ExprNode *root);
+
+ExprNode *makeBinaryNode(Token_Type theTokenType, ExprNode *left, ExprNode *right);
+
+ExprNode *makeFuncNode(Token_Type theTokenType, FuncPtr funcPtr, ExprNode *child);
+
+ExprNode *makeConstNumberNode(Token_Type theTokenType, double value);
+
+ExprNode *makeConstParamNode(Token_Type theTokenType, double *valuePtr);
+
+//错误输出
+void parserPrint(string msg);
+
+void parserPrint(const char *msg);
+
+//测试
+void back(string msg);
+
+void enter(string msg);
 
 void printByPreOrder(ExprNode *root, int nodeIndent);
 
@@ -68,7 +78,7 @@ void parser(string filename) {
 void initParser(string filename) {
     if (!initLexer(filename))
         parserError3("initParser error");
-    parserOut.open("E:\\clionData\\learnCpp\\interpreter\\parser\\parserLog.txt");
+    parserOut.open("../parser/parserLog.txt");
     parameter = 0.0;
     indent = 0;
 }
@@ -322,7 +332,7 @@ ExprNode *atom() {
             break;
         case L_BRACKET:
             matchToken(L_BRACKET);
-            thisNode=expression();
+            thisNode=expression(); //debug3
             matchToken(R_BRACKET);
             break;
         default:

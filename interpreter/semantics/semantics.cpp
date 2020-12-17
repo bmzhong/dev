@@ -2,6 +2,7 @@
 #include "../parser/parser.cpp"
 #include <cmath>
 
+
 double originX = 0, originY = 0, scaleX = 1, scaleY = 1, angle = 0;
 
 double getExprNode(ExprNode *root) {

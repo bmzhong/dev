@@ -15,8 +15,6 @@ fstream
 -
 
 E:/dev/interpreter/lexer/dfa.cpp
-lexer.hpp
-E:/dev/interpreter/lexer/lexer.hpp
 map
 -
 
@@ -85,4 +83,6 @@ cmath
 E:/dev/interpreter/semantics/semantics.hpp
 ../parser/parser.cpp
 E:/dev/interpreter/parser/parser.cpp
+../run/interpreter.cpp
+E:/dev/interpreter/run/interpreter.cpp
 
