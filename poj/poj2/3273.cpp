@@ -1,7 +1,8 @@
+// logu p2884 p1182
 #include <iostream>
 #include <cstdio>
 using namespace std;
-int N, M, K, A[100000];
+int N, M, MAX = 0, A[100000];
 inline int read()
 {
     int x = 0, f = 1;
@@ -19,42 +20,48 @@ inline int read()
     }
     return x * f;
 }
-bool judge(int mid)
+bool judge(long long mid)
 {
-    int sum = 0, cnt = 0;
+    long long sum = 0;
+    int cnt = 0;
     for (int i = 0; i < N; ++i)
     {
         sum += A[i];
-        if (sum <= mid)
-            ++cnt;
-        else
-            sum = 0;
         if (sum > mid)
-            --cnt;
+        {
+            sum = A[i];
+            ++cnt;
+        }
     }
-    if (cnt <= K)
+    ++cnt;
+    if (cnt <= M)
         return true;
     return false;
 }
+
 int main()
 {
     N = read();
     M = read();
-    K = N - M;
     for (int i = 0; i < N; ++i)
     {
         A[i] = read();
+        MAX = A[i] > MAX ? A[i] : MAX;
     }
-    int lb = 0, ub = 2147483647, mid;
-    while (lb <= ub)
+    long long lb = MAX - 1, ub = 10e13+1, mid = 0;
+    while (ub - lb > 1)
     {
-        mid = ((lb + ub) >> 1);
+        mid = (lb + ub) >> 1;
         if (judge(mid))
-            lb = mid + 1;
+        {
+            ub = mid;
+        }
         else
-            ub = mid - 1;
+        {
+            lb = mid;
+        }
     }
-    printf("%d\n", lb - 1);
+    printf("%lld\n", ub);
     system("pause");
     return 0;
 }

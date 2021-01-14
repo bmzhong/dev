@@ -8,7 +8,6 @@
 #include "../semantics/semantics.cpp"
 
 
-//递归下降子程序
 void program();
 
 void statement();
@@ -332,7 +331,7 @@ ExprNode *atom() {
             break;
         case L_BRACKET:
             matchToken(L_BRACKET);
-            thisNode=expression(); //debug3
+            thisNode=expression(); //debug4
             matchToken(R_BRACKET);
             break;
         default:

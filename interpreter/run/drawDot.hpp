@@ -3,6 +3,6 @@
 
 void showMessage(int flag, const char *_msg1);
 
-void drawPixel(unsigned long x, unsigned long y, unsigned int colorValue);
+void drawPixel(unsigned long x, unsigned long y);
 
 #endif

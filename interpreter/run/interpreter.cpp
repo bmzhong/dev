@@ -40,7 +40,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 }
 //注册窗口
 //HINSTANCE hInstance,		当前应用程序实例的句柄
-//HINSTANCE hPrevInstance,	系统中前一个应用程序实例的句柄，很少用到
+//HINSTANCE hPrevInstance,	系统中前一个应用程序实例的句柄
 //int nCmdShow				决定应用程序窗口显示方式的标志
 int registerWindow(HINSTANCE hInst, HINSTANCE hPrevInstance, int nCmdShow)
 {
@@ -96,9 +96,9 @@ void showMessage(int flag, const char *msg1)
         MessageBox(NULL, msg1, msg3, MB_OK | MB_ICONERROR);
 }
 
-void drawPixel(unsigned long x, unsigned long y, unsigned int colorValue)
+void drawPixel(unsigned long x, unsigned long y)
 {
-    COLORREF color = RGB(255, 0, 0);
+    COLORREF color = RGB(157, 61, 207);
     SetPixel(hdc, x, y, color);
     SetPixel(hdc, x+1, y, color);
     SetPixel(hdc, x, y+1, color);

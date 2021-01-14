@@ -1,6 +1,6 @@
-origin is (10,40);
+origin > is (10,40);
 
-scale is (150,40);
+sca%le is (150,40);
 
 rot is 0;
 

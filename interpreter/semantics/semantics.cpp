@@ -65,6 +65,6 @@ void drawLoop(ExprNode *startPtr, ExprNode *endPtr, ExprNode *stepPtr, ExprNode 
     double dotX, dotY;
     for (*T = start; *T <= end; *T = *T + step) {
         calcCoord(dotXPtr, dotYPtr, dotX, dotY);
-        drawPixel((unsigned long) dotX, (unsigned long) dotY,0);
+        drawPixel((unsigned long) dotX, (unsigned long) dotY);
     }
 }
