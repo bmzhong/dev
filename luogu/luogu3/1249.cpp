@@ -1,23 +1,56 @@
 #include <iostream>
 #include <cstdio>
 using namespace std;
-int n, used[10001], x[2][10001], len1 = 0, len2 = 0;
-int fun(int b, int g)
+int n, a[100000], len = 0;
+void mutiply(int b)
 {
-    if (b <= 4)
-        return 0;
-    for (int p = b / 2; p > 1; --p)
+    int jw = 0;
+    for (int i = 0; i < len; ++i)
     {
-        len1 = fun(p, 0);
-        if (used[p] == 1 && len1 == 0)
-            return 0;
-        else if (used[p] == 0 && len1 == 0)
-        {
-            x[g][] = 1;
-        }
+        a[i] = a[i] * b + jw;
+        jw = a[i] / 10;
+        a[i] %= 10;
+    }
+    while (jw > 0)
+    {
+        a[len++] = jw % 10;
+        jw /= 10;
     }
 }
 int main()
 {
     scanf("%d", &n);
+    a[0] = 1;
+    len = 1;
+    int sum = 0, k;
+    for (int i = 2; i <= n; ++i)
+    {
+        sum += i;
+        if (sum >= n)
+        {
+            k = i;
+            break;
+        }
+    }
+    int q = 0;
+    if (sum - n == 1)
+        q = 2;
+    else if (sum - n > 1)
+        q = sum - n;
+    for (int i = 2; i <= k; ++i)
+    {
+        if (i != q)
+        {
+            printf("%d%c", i, i == k ? '\n' : ' ');
+            mutiply(i);
+        }
+    }
+    if (q == k)
+        printf("\n");
+    for (int i = len-1; i >= 0; --i)
+    {
+        printf("%d",a[i]);
+    }
+    system("pause");
+    return 0;
 }
