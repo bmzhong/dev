@@ -27,7 +27,7 @@ int main()
     if (jw)
     {
         lenc++;
-        c[lenc - 1] = 1;
+        c[lenc - 1] = jw;
     }
     for (int i = lenc - 1; i >= 0; --i)
     {
