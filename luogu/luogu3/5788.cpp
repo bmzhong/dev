@@ -48,3 +48,38 @@ int main()
     system("pause");
     return 0;
 }
+
+/* #include <iostream>
+#include <stack>
+using namespace std;
+int n, a[1000], res[1000];
+int main()
+{
+    scanf("%d", &n);
+    for (int i = 1; i <= n; ++i)
+    {
+        scanf("%d", &a[i]);
+    }
+    stack<int> s;
+    for (int i = 1; i <= n; ++i)
+    {
+        while (!s.empty() && a[s.top()] < a[i])
+        {
+            res[s.top()] = i;
+            s.pop();
+        }
+        s.push(i);
+    }
+    while (!s.empty())
+    {
+        res[s.top()] = 0;
+        s.pop();
+    }
+    for (int i = 1; i <= n; ++i)
+    {
+        printf("%d ",res[i]);
+    }
+    printf("\n");
+    system("pause");
+    return 0;
+} */

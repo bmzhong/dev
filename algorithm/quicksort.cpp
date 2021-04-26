@@ -4,16 +4,16 @@ int partition(int a[], int x, int y);
 void quickSort(int a[], int x, int y);
 int main()
 {
-    int a[6]={1,5,4,2,7,12};
+    int a[6] = {1, 2, 31, 2, 4, 5};
 
-    quickSort(a,0,5);
-    for(int i=0;i<5;++i){
-        cout<<a[i]<<" ";
+    quickSort(a, 0, 5);
+    for (int i = 0; i < 5; ++i)
+    {
+        cout << a[i] << " ";
     }
-    cout<<endl;
+    cout << endl;
     system("pause");
     return 0;
-
 }
 
 int partition(int a[], int x, int y)
@@ -21,10 +21,10 @@ int partition(int a[], int x, int y)
     int pivotkey = a[x];
     while (x < y)
     {
-        while (x<y&&a[y] > pivotkey)
+        while (x < y && a[y] >= pivotkey)
             --y;
         a[x] = a[y];
-        while (x<y&&a[x] < pivotkey)
+        while (x < y && a[x] < pivotkey)
             ++x;
         a[y] = a[x];
     }

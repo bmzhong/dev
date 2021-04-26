@@ -1,47 +1,53 @@
 #include <iostream>
 using namespace std;
-int partition(int a[], int x, int y);
-void quick_sort(int a[], int x, int y);
+int n, a[1000];
+int partition(int l, int r);
+void quick_sort(int l, int r);
 int main()
 {
-    int a[6]={1,5,4,2,7,12};
-
-    quick_sort(a,0,5);
-    for(int i=0;i<5;++i){
-        cout<<a[i]<<" ";
+    cout<<"input:"<<endl;
+    cin >> n;
+    for (int i = 0; i < n; ++i)
+    {
+        cin >> a[i];
     }
-    cout<<endl;
+    quick_sort(0, n - 1);
+    cout<<"output:"<<endl;
+    for (int i = 0; i < n; ++i)
+    {
+        cout << a[i] << " ";
+    }
+    cout << endl;
     system("pause");
     return 0;
-
 }
-
-int partition(int a[], int x, int y)
+int partition(int l, int r)
 {
-    int pivotkey = a[x];
-    while (x < y)
+    int key = a[l];
+    while (l < r)
     {
-        while (x<y&&a[y] > pivotkey)
-            --y;
-        a[x] = a[y];
-        while (x<y&&a[x] < pivotkey)
-            ++x;
-        a[y] = a[x];
+        while (l < r && a[r] >= key)
+            --r;
+        if (l < r)
+            a[l++] = a[r];
+        while (l < r && a[l] < key)
+            ++l;
+        if (l < r)
+            a[r--] = a[l];
     }
-    a[x] = pivotkey;
-    return x;
+    a[l] = key;
+    return l;
 }
-
-void quick_sort(int a[], int x, int y)
+void quick_sort(int l, int r)
 {
-    int m = partition(a, x, y);
-    if (m - 1 > x)
-    {
-        quickSort(a, x, m - 1);
-    }
-    if (m + 1 < y)
-    {
-        quickSort(a, m + 1, y);
-    }
+    if (r <= l)
+        return;
+    int m = partition(l, r);
+    quick_sort(l, m - 1);
+    quick_sort(m + 1, r);
 }
-//24 27��Ҫȷ��x<y
+/*
+case 1
+6
+4 6 5 2 1 3
+*/

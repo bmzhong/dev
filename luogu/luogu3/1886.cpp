@@ -55,7 +55,7 @@ int main()
             mins[mini++] = a[mindq.front()];
         }
     }
-    
+
     for (int i = 0; i < mini - 1; ++i)
     {
         printf("%d ", mins[i]);
@@ -71,3 +71,38 @@ int main()
     system("pause");
     return 0;
 }
+
+/* #include <iostream>
+#include <queue>
+using namespace std;
+int n, k, a[10000], maxs[1000], mins[1000];
+int main()
+{
+    scanf("%d%d", &n, &k);
+    for (int i = 0; i < n; ++i)
+    {
+        scanf("%d", &a[i]);
+    }
+    deque<int> maxdq;
+    int maxi = 0, mini = 0;
+    for (int i = 0; i < n; ++i)
+    {
+        while (!maxdq.empty() && i - k > maxdq.front())
+        {
+            maxdq.pop_front();
+        }
+        while (!maxdq.empty() && a[maxdq.back()] <= a[i])
+        {
+            maxdq.pop_back();
+        }
+        maxdq.push_back(i);
+        if (i >= k - 1)
+            maxs[maxi++] = a[maxdq.front()];
+    }
+    for (int i = 0; i < maxi; ++i)
+    {
+        printf("%d ", maxs[i]);
+    }
+    system("pause");
+    return 0;
+} */

@@ -2,37 +2,40 @@
 #include <algorithm>
 using namespace std;
 const int maxn = 10000;
-int s[maxn], t[maxn], n, x, ans = 0;
+int s[maxn], t[maxn], n, x;
 void merge_sort(int l, int r);
 void solve();
-bool binary_search_a(int a);
+bool binary_search(int a);
 int main()
 {
+	cout << "input: " << endl;
 	cin >> n >> x;
 	for (int i = 0; i < n; ++i)
 	{
 		cin >> s[i];
 	}
-	merge_sort(0, n - 1);
+	cout << "output: " << endl;
 	solve();
-	cout << ans << endl;
 	system("pause");
 	return 0;
 }
 
 void solve()
 {
+	merge_sort(0, n - 1);
+	int count = 0;
 	for (int i = 0; i < n / 2; ++i)
 	{
-		if (binary_search_a(x - s[i]))
+		if (binary_search(x - s[i]))
 		{
-			ans++;
-			cout << s[i] << "+" << x - s[i] << "=" << x << endl;
+			count++;
+			// cout << s[i] << "+" << x - s[i] << "=" << x << endl;
 		}
 	}
+	cout << count << endl;
 }
 
-bool binary_search_a(int a)
+bool binary_search(int a)
 {
 	int l = 0, r = n - 1, m;
 	while (l <= r)
@@ -72,3 +75,8 @@ void merge_sort(int l, int r)
 		}
 	}
 }
+/*
+case 1
+6 10
+1 9 2 8 3 7
+*/
